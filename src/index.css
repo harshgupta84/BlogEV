@@ -2,17 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Default light theme styles */
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --background-color: white;
+  --text-color: black;
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #06040f;
+/* Dark theme styles */
+html.dark {
+  --background-color: #121212;
+  --text-color: #ffffff;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Light theme styles */
+html.light {
+  --background-color: white;
+  --text-color: black;
+}
+
+/* System theme uses the default theme, but you can modify it as needed */
+html.system {
+  --background-color: white;
+  --text-color: black;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
 }
