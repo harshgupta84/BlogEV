@@ -46,7 +46,7 @@ function Header() {
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] flex items-center justify-center shadow-lg">
                 <Book className="w-7 h-7 text-white" />
               </div>
-              <span className="text-xl font-bold">BlogEV</span>
+              <span className="text-xl font-bold text-[#8CCC4C]">BlogEV</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -90,7 +90,7 @@ function Header() {
 
               <div className="flex items-center space-x-4">
                 <ThemeSwitcher />
-                <Button className="dark:bg-white dark:text-black" onClick={() => navigate("/auth")}>
+                <Button className="dark:bg-white dark:text-black" onClick={() => navigate("/mynotes")}>
                   Explore More
                   <MoveRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -144,7 +144,7 @@ function Header() {
                   <Button
                     className="w-full justify-start"
                     onClick={() => {
-                      navigate("/auth");
+                      navigate("/mynotes");
                       setIsOpen(false);
                     }}
                   >

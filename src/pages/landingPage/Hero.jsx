@@ -1,13 +1,13 @@
-import { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
 import { MoveRight, PhoneCall, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { MarqueeDemo } from './MarqueeDemo';
+import { MarqueeDemo } from "./MarqueeDemo";
 import DotPattern from "@/components/ui/dot-pattern";
 import { cn } from "@/lib/utils";
 import { OrbitingCirclesDemo } from "./OrbitingCirclesDemo";
-
+import AnimatedShinyText from "@/components/ui/animated-shiny-text";
+import { useNavigate } from "react-router-dom";
 function Hero() {
+  const navigate=useNavigate();
   return (
     <div className="flex flex-col">
       <DotPattern
@@ -29,18 +29,30 @@ function Hero() {
                 </span>
               </h1>
 
-              <p className="text-sm md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center mx-auto dark:text-gray-300">
-                <span className="font-bold text-black italic dark:text-white">
-                  BlogEV
-                </span>{" "}
-                gives you an environment where you can make Markdown fun.
+              <p className="text-2xl md:text-2xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center mx-auto dark:text-white">
+                <span className="font-bold italic text-[#8CCC4C]">BlogEV</span>{" "}
+                where you can make Markdown fun.
               </p>
+            </div>
+            <div>
+              <div
+                className={cn(
+                  "group rounded-full border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
+                )}
+                onClick={() => {
+                  navigate("/mynotes");
+                }}
+              >
+                <AnimatedShinyText className="text-1xl inline-flex items-center text-black justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+                  <span>✨ Lets Go</span>
+                  <MoveRight className="ml-2 h-4 w-4" />
+                </AnimatedShinyText>
+              </div>
             </div>
           </div>
         </div>
-       
-          <OrbitingCirclesDemo />
-        
+
+        <OrbitingCirclesDemo />
       </div>
 
       <MarqueeDemo />

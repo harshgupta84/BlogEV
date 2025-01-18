@@ -8,16 +8,17 @@ export function OrbitingCirclesDemo() {
       </span>
 
       <OrbitingCircles iconSize={60} radius={200}>
-        <Icons.whatsapp />
+        <Icons.gitHub />
         <Icons.notion />
         <Icons.openai />
         <Icons.googleDrive />
-        <Icons.whatsapp />
+        <Icons.gitHub />
       </OrbitingCircles>
       <OrbitingCircles iconSize={40} radius={300} reverse speed={2}>
-        <Icons.whatsapp />
+        <Icons.gitHub/>
         <Icons.notion />
         <Icons.openai />
+       
         <Icons.googleDrive />
       </OrbitingCircles>
     </div>
@@ -97,6 +98,7 @@ const Icons = {
       />
     </svg>
   ),
+  
   whatsapp: () => (
     <svg
       width="100"
