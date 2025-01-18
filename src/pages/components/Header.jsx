@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import ThemeSwitcher from "./ThemeSwitcher";
+import ThemeSwitcher from "../landingPage/ThemeSwitcher";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,

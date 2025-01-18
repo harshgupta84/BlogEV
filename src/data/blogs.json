@@ -1,0 +1,94 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "title": "React Use State",
+      "content": "# This is the sample data",
+      "createdAt": "2025-01-18T12:34:56Z",
+      "author": "Harsh G",
+      "category": "Web Dev",
+      "pic": "./profile.png"
+    },
+    {
+      "id": 2,
+      "title": "Zustand Use Case",
+      "content": "## This is zustand data",
+      "createdAt": "2025-04-18T12:34:56Z",
+      "author": "Harsh Kamboj",
+      "category": "Web Dev",
+      "pic": "./profile.png"
+    },
+    {
+      "id": 3,
+      "title": "Node.js Middleware",
+      "content": "### Understanding middleware in Node.js",
+      "createdAt": "2025-06-20T10:00:00Z",
+      "author": "Rahul Sharma",
+      "category": "Backend",
+      "pic": "./profile.png"
+    },
+    {
+      "id": 4,
+      "title": "MongoDB Aggregation",
+      "content": "### How to use MongoDB aggregation pipelines effectively",
+      "createdAt": "2025-07-15T15:45:30Z",
+      "author": "Ananya Gupta",
+      "category": "Database",
+      "pic": "./profile.png"
+    },
+    {
+      "id": 5,
+      "title": "CSS Grid vs Flexbox",
+      "content": "#### A detailed comparison between Grid and Flexbox",
+      "createdAt": "2025-08-05T09:30:00Z",
+      "author": "Priya Singh",
+      "category": "Design",
+      "pic": "./profile.png"
+    },
+    {
+      "id": 6,
+      "title": "Understanding Redux Toolkit",
+      "content": "### Simplifying state management with Redux Toolkit",
+      "createdAt": "2025-09-12T18:20:15Z",
+      "author": "Karan Patel",
+      "category": "State Management",
+      "pic": "./profile.png"
+    },
+    {
+      "id": 7,
+      "title": "API Design Principles",
+      "content": "### Best practices for designing scalable APIs",
+      "createdAt": "2025-10-22T14:10:00Z",
+      "author": "Harsh G",
+      "category": "Backend",
+      "pic": "./profile.png"
+    },
+    {
+      "id": 8,
+      "title": "React Router Dom v6",
+      "content": "#### Key features and examples for React Router Dom v6",
+      "createdAt": "2025-11-03T08:00:00Z",
+      "author": "Sneha Kapoor",
+      "category": "Web Dev",
+      "pic": "./profile.png"
+    },
+    {
+      "id": 9,
+      "title": "TypeScript in React",
+      "content": "### How to integrate TypeScript into React projects",
+      "createdAt": "2025-12-10T13:00:00Z",
+      "author": "Vivek Raj",
+      "category": "Web Dev",
+      "pic": "./profile.png"
+    },
+    {
+      "id": 10,
+      "title": "Optimizing React Performance",
+      "content": "#### Tips to optimize performance in React apps",
+      "createdAt": "2026-01-05T16:30:00Z",
+      "author": "Harsh Kamboj",
+      "category": "Web Dev",
+      "pic": "./profile.png"
+    }
+  ]
+}

@@ -16,9 +16,7 @@ function Hero() {
         )}
       />
       <div className="w-full min-h-screen flex items-center justify-center relative bg-background sm:flexflex-row">
-        <div className="absolute inset-0 bg-dot-black/[0.2] dark:bg-dot-white/[0.2]">
-          <div className="absolute inset-0 bg-background [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
-        </div>
+        
 
         <div className="container relative z-10 mx-auto max-w-[1200px] flex items-center justify-center">
           <div className="flex gap-8 py-12 lg:py-10 items-center justify-center flex-col text-center">
