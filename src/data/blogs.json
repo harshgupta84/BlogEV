@@ -8,7 +8,7 @@
       "author": "Harsh G",
       "category": "Web Dev",
       "pic": "./profile.png",
-      "likes":"100"
+      "likes":"70"
     },
     {
       "id": 2,
@@ -18,7 +18,7 @@
       "author": "Harsh Kamboj",
       "category": "Web Dev",
       "pic": "./profile.png",
-      "likes":"100"
+      "likes":"107"
     },
     {
       "id": 3,
@@ -28,7 +28,7 @@
       "author": "Rahul Sharma",
       "category": "Backend",
       "pic": "./profile.png",
-      "likes":"100"
+      "likes":"12"
     },
     {
       "id": 4,
@@ -38,7 +38,7 @@
       "author": "Ananya Gupta",
       "category": "Database",
       "pic": "./profile.png",
-      "likes":"100"
+      "likes":"1022"
     },
     {
       "id": 5,
@@ -48,7 +48,7 @@
       "author": "Priya Singh",
       "category": "Design",
       "pic": "./profile.png",
-      "likes":"100"
+      "likes":"166"
     },
     {
       "id": 6,
@@ -68,7 +68,7 @@
       "author": "Harsh G",
       "category": "Backend",
       "pic": "./profile.png",
-      "likes":"100"
+      "likes":"170"
     },
     {
       "id": 8,
@@ -78,7 +78,7 @@
       "author": "Sneha Kapoor",
       "category": "Web Dev",
       "pic": "./profile.png",
-      "likes":"100"
+      "likes":"19"
     },
     {
       "id": 9,
@@ -88,7 +88,7 @@
       "author": "Vivek Raj",
       "category": "Web Dev",
       "pic": "./profile.png",
-      "likes":"100"
+      "likes":"68"
     },
     {
       "id": 10,
@@ -98,7 +98,7 @@
       "author": "Harsh Kamboj",
       "category": "Web Dev",
       "pic": "./profile.png",
-      "likes":"100"
+      "likes":"66"
     }
   ]
 }

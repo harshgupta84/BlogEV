@@ -43,8 +43,8 @@ function Header() {
           <nav className="flex h-16 items-center justify-between">
             {/* Logo Section */}
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] flex items-center justify-center shadow-lg">
-                <Book className="w-7 h-7 text-white" />
+              <div className="text-4xl w-10 h-10 rounded-full  flex items-center justify-center shadow-lg">
+              📝
               </div>
               <span className="text-xl font-bold text-[#8CCC4C]">BlogEV</span>
             </Link>

@@ -26,7 +26,7 @@ export default function BlogPostCard({
   return (
     
       <Card>
-        <div className="flex items-center space-x-2 text-[#8CCC4C] m-2">
+        <div className="flex items-center space-x-2 text-[#8CCC4C] ml-4 mt-4">
             <Avatar className="h-8 w-8 border dark:border-white ">
               <AvatarImage src={pic} alt={author} />
               <AvatarFallback>
