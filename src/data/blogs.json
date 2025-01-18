@@ -7,7 +7,8 @@
       "createdAt": "2025-01-18T12:34:56Z",
       "author": "Harsh G",
       "category": "Web Dev",
-      "pic": "./profile.png"
+      "pic": "./profile.png",
+      "likes":"100"
     },
     {
       "id": 2,
@@ -16,7 +17,8 @@
       "createdAt": "2025-04-18T12:34:56Z",
       "author": "Harsh Kamboj",
       "category": "Web Dev",
-      "pic": "./profile.png"
+      "pic": "./profile.png",
+      "likes":"100"
     },
     {
       "id": 3,
@@ -25,7 +27,8 @@
       "createdAt": "2025-06-20T10:00:00Z",
       "author": "Rahul Sharma",
       "category": "Backend",
-      "pic": "./profile.png"
+      "pic": "./profile.png",
+      "likes":"100"
     },
     {
       "id": 4,
@@ -34,7 +37,8 @@
       "createdAt": "2025-07-15T15:45:30Z",
       "author": "Ananya Gupta",
       "category": "Database",
-      "pic": "./profile.png"
+      "pic": "./profile.png",
+      "likes":"100"
     },
     {
       "id": 5,
@@ -43,7 +47,8 @@
       "createdAt": "2025-08-05T09:30:00Z",
       "author": "Priya Singh",
       "category": "Design",
-      "pic": "./profile.png"
+      "pic": "./profile.png",
+      "likes":"100"
     },
     {
       "id": 6,
@@ -52,7 +57,8 @@
       "createdAt": "2025-09-12T18:20:15Z",
       "author": "Karan Patel",
       "category": "State ",
-      "pic": "./profile.png"
+      "pic": "./profile.png",
+      "likes":"100"
     },
     {
       "id": 7,
@@ -61,7 +67,8 @@
       "createdAt": "2025-10-22T14:10:00Z",
       "author": "Harsh G",
       "category": "Backend",
-      "pic": "./profile.png"
+      "pic": "./profile.png",
+      "likes":"100"
     },
     {
       "id": 8,
@@ -70,7 +77,8 @@
       "createdAt": "2025-11-03T08:00:00Z",
       "author": "Sneha Kapoor",
       "category": "Web Dev",
-      "pic": "./profile.png"
+      "pic": "./profile.png",
+      "likes":"100"
     },
     {
       "id": 9,
@@ -79,7 +87,8 @@
       "createdAt": "2025-12-10T13:00:00Z",
       "author": "Vivek Raj",
       "category": "Web Dev",
-      "pic": "./profile.png"
+      "pic": "./profile.png",
+      "likes":"100"
     },
     {
       "id": 10,
@@ -88,7 +97,8 @@
       "createdAt": "2026-01-05T16:30:00Z",
       "author": "Harsh Kamboj",
       "category": "Web Dev",
-      "pic": "./profile.png"
+      "pic": "./profile.png",
+      "likes":"100"
     }
   ]
 }

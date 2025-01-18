@@ -46,6 +46,22 @@ module.exports = {
   				'100%': {
   					backgroundPosition: 'bottom center'
   				}
+  			},
+  			shine: {
+  				'0%': {
+  					'background-position': '0% 0%'
+  				},
+  				'50%': {
+  					'background-position': '100% 100%'
+  				},
+  				to: {
+  					'background-position': '0% 0%'
+  				}
+  			},
+  			'border-beam': {
+  				'100%': {
+  					'offset-distance': '100%'
+  				}
   			}
   		},
   		animation: {
@@ -53,7 +69,9 @@ module.exports = {
   			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
   			orbit: 'orbit calc(var(--duration)*1s) linear infinite',
   			'shiny-text': 'shiny-text 8s infinite',
-  			'background-position-spin': 'background-position-spin 3000ms infinite alternate'
+  			'background-position-spin': 'background-position-spin 3000ms infinite alternate',
+  			shine: 'shine var(--duration) infinite linear',
+  			'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear'
   		}
   	}
   },
