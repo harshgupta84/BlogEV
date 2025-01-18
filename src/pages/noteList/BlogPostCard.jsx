@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { CalendarIcon } from 'lucide-react'
 import { NeonGradientCard } from "@/components/ui/neon-gradient-card"
+import { useNavigate } from "react-router-dom"
 
 export default function BlogPostCard({
   title,
@@ -16,9 +17,9 @@ export default function BlogPostCard({
     month: 'long',
     day: 'numeric'
   })
-
+  
   return (
-    <NeonGradientCard className=" ">
+    <NeonGradientCard >
       <CardHeader className="pb-4 text-[#00729E]">
         <h2 className="text-3xl font-bold leading-tight">{title}</h2>
       </CardHeader>
