@@ -16,7 +16,7 @@ const useBlogStore = create(
           author,
           category,
           pic,
-          likes,
+          likes: 0,
         };
 
         set((state) => ({

@@ -36,9 +36,8 @@ console.log("Hello, Markdown!");
  
   const handleSave = () => {
     const title = getTitle(markdown); 
-    addBlog(title, markdown, author, category, pic,0);
+    addBlog(title, markdown, author, category, pic);
 
-    // Show success toast using ShadCN's toast system
     toast({
       title: `Blog "${title}" saved successfully!`,
       description: "Your blog has been saved to the system.",
@@ -73,7 +72,7 @@ console.log("Hello, Markdown!");
             placeholder="Write your Markdown here..."
           ></textarea>
 
-          {/* Preview Section */}
+         
           <div className="w-1/2 p-4 overflow-auto bg-neutral-50 dark:bg-neutral-900 dark:text-white">
             <ReactMarkdown
               className="prose dark:prose-invert"
