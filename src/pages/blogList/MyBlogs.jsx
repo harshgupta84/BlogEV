@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../components/Header";
 import BlogPosts from "./BlogPosts";
-import { File } from "lucide-react";
-function MyNotes() {
+
+function MyBlogs() {
   return (
     <div className="">
       <Header />
@@ -22,4 +22,4 @@ function MyNotes() {
   );
 }
 
-export default MyNotes;
+export default MyBlogs;

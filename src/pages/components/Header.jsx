@@ -90,7 +90,7 @@ function Header() {
 
               <div className="flex items-center space-x-4">
                 <ThemeSwitcher />
-                <Button className="dark:bg-white dark:text-black" onClick={() => navigate("/CreateBlog")}>
+                <Button className="dark:bg-white dark:text-black" onClick={() => navigate("/blog/create")}>
                   Write
                   <PencilLine className="ml-2 h-4 w-4" />
                 </Button>
@@ -144,7 +144,7 @@ function Header() {
                   <Button
                     className="w-full justify-start"
                     onClick={() => {
-                      navigate("/CreateBlog");
+                      navigate("/blog/create");
                       setIsOpen(false);
                     }}
                   >

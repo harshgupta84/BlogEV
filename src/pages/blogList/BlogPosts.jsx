@@ -4,6 +4,8 @@ import DotPattern from "@/components/ui/dot-pattern";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 import { BorderBeam } from "@/components/ui/border-beam";
+
+
 export default function BlogPosts() {
   return (
     <div>

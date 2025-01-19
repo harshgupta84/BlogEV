@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import { v4 as uuidv4 } from "uuid";
 
-// Import the blogs.json file
-import blogsData from "../data/blogs.json"; // Make sure the path is correct
+import blogsData from "../data/blogs.json"; 
 
 // Define the store
 const useBlogStore = create((set) => ({
