@@ -9,7 +9,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { Book, Menu, MoveRight, X } from "lucide-react";
+import { Book, Menu, MoveRight, X,Pencil,PencilLine } from "lucide-react";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,8 +43,8 @@ function Header() {
           <nav className="flex h-16 items-center justify-between">
             {/* Logo Section */}
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] flex items-center justify-center shadow-lg">
-                <Book className="w-7 h-7 text-white" />
+              <div className="text-4xl w-10 h-10 rounded-full  flex items-center justify-center shadow-lg">
+              📝
               </div>
               <span className="text-xl font-bold text-[#8CCC4C]">BlogEV</span>
             </Link>
@@ -90,9 +90,9 @@ function Header() {
 
               <div className="flex items-center space-x-4">
                 <ThemeSwitcher />
-                <Button className="dark:bg-white dark:text-black" onClick={() => navigate("/mynotes")}>
-                  Explore More
-                  <MoveRight className="ml-2 h-4 w-4" />
+                <Button className="dark:bg-white dark:text-black" onClick={() => navigate("/create")}>
+                  Write
+                  <PencilLine className="ml-2 h-4 w-4" />
                 </Button>
               </div>
             </div>
@@ -144,12 +144,12 @@ function Header() {
                   <Button
                     className="w-full justify-start"
                     onClick={() => {
-                      navigate("/mynotes");
+                      navigate("/create");
                       setIsOpen(false);
                     }}
                   >
-                    Explore More
-                    <MoveRight className="ml-2 h-4 w-4" />
+                     Write
+                     <PencilLine className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
               </div>
