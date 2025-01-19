@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/landingPage/LandingPage";
 import MyNotes from "./pages/noteList/MyNotes";
 import Note from "./pages/noteView/Note";
+import CreateBlog from "./pages/CreateBlog/CreateBlog";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           
             <Route path="/" Component={LandingPage}></Route>
             <Route path="/mynotes" Component={MyNotes}></Route>
+            <Route path="/CreateBlog" Component={CreateBlog}></Route>
             <Route path="/note/view/:id" Component={Note}></Route>
         </Routes>
       </BrowserRouter>
