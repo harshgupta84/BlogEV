@@ -8,14 +8,13 @@ const CreateBlog = () => {
   return (
     <div>
         <div><Header /></div>
-        <div>
-          
-        <ToastProvider> {/* Wrapping with ToastProvider */}
-        <Editor />
-        <Toaster /> {/* This will render all the toast notifications */}
-      </ToastProvider>
-          
-        </div>
+        <div className="mt-24">
+          <ToastProvider> {/* Wrapping with ToastProvider */}
+          <Editor />
+          <Toaster /> {/* This will render all the toast notifications */}
+          </ToastProvider>
+        </div> 
+       
     </div>
 
   ) 
