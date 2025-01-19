@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import { OrbitingCirclesDemo } from "./OrbitingCirclesDemo";
 import AnimatedShinyText from "@/components/ui/animated-shiny-text";
 import { useNavigate } from "react-router-dom";
+
+
 function Hero() {
   const navigate=useNavigate();
   return (

@@ -21,14 +21,8 @@ function Header() {
       href: "/",
     },
     {
-      title: "Services",
-      description: "Find healthcare services and support near you",
-      items: [
-        { title: "Create Your Own Blog", href: "/soon" },
-        { title: "Instant Share", href: "/soon" },
-        { title: "MD to PDF", href: "/soon" },
-        { title: "Recommended Blogs", href: "/soon" },
-      ],
+      title: "My Blogs",
+      href: "/myblogs",
     },
     {
       title: "About Us",
