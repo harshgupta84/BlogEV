@@ -22,23 +22,21 @@ console.log("Hello, Markdown!");
 `);
 
   const [author, setAuthor] = useState('John Doe'); // Placeholder author
-  const [category, setCategory] = useState('Technology'); // Placeholder category
-  const [pic, setPic] = useState(''); // Placeholder picture URL
+  const [category, setCategory] = useState('Technology'); 
+  const [pic, setPic] = useState(''); 
   const { addBlog } = useBlogStore(); // Get the addBlog function from the store
   const { toast } = useToast(); // Use toast for notifications
 
-  // Function to generate title from the first line of markdown
+ 
   const getTitle = (markdown) => {
     const firstLine = markdown.split("\n")[0];
     return firstLine.startsWith("#") ? firstLine.replace(/^#\s*/, "") : "Untitled Blog";
   };
 
-  // Handle save functionality
+ 
   const handleSave = () => {
-    const title = getTitle(markdown); // Extract title from markdown
-
-    // Add the blog to the Zustand store
-    addBlog(title, markdown, author, category, pic);
+    const title = getTitle(markdown); 
+    addBlog(title, markdown, author, category, pic,0);
 
     // Show success toast using ShadCN's toast system
     toast({
@@ -49,9 +47,9 @@ console.log("Hello, Markdown!");
 
     // Reset the markdown content
     setMarkdown("# New Blog...");
-    setAuthor(''); // Reset author input (or you can keep a default value)
-    setCategory(''); // Reset category input (or keep a default)
-    setPic(''); // Reset pic URL input (if needed)
+    setAuthor(''); 
+    setCategory(''); 
+    setPic(''); 
   };
 
   return (

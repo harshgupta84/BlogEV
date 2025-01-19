@@ -1,12 +1,16 @@
 import BlogPostCard from "./BlogPostCard";
-import { blogs } from "../../data/blogs.json";
+
 import DotPattern from "@/components/ui/dot-pattern";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 import { BorderBeam } from "@/components/ui/border-beam";
-
+import useBlogStore from "@/store/blogStore";  
+import { useEffect } from "react";
 
 export default function BlogPosts() {
+  const {blogs} =useBlogStore();
+
+
   return (
     <div>
       <DotPattern
@@ -25,7 +29,7 @@ export default function BlogPosts() {
                   duration={9}
                   delay={8}
                 />
-                <BlogPostCard key={blog.id} {...blog} />
+                <BlogPostCard key={blog.id} blog={blog} />
               </div>
             </Link>
           ))}
