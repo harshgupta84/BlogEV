@@ -1,22 +1,21 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { v4 as uuidv4 } from "uuid";
-import { list } from "postcss";
-import blogsData from "../data/blogs.json";
+import blogsData from "../data/blogs.json"; // Ensure this points to your blogs.json file
 
 const useBlogStore = create(
   persist(
     (set, get) => ({
-      blogs: blogsData.blogs, // Default state for blogs
+      blogs: [], // Initialize state with blogs from blogs.json
       addBlog: (title, content, author, category, pic) => {
         const newBlog = {
-          id: uuidv4(),
+          id: uuidv4(), // Generate unique ID for new blog
           title,
           content,
           createdAt: new Date().toISOString(),
           author,
           category,
-          pic, 
+          pic,
           likes: 0,
         };
 
@@ -26,19 +25,20 @@ const useBlogStore = create(
       },
       deleteBlog: (id) => {
         set((state) => ({
-          blogs: state.blogs.filter((blog) => blog.id !== id),
+          blogs: state.blogs.filter((blog) => String(blog.id) !== String(id)),
         }));
       },
       getBlogById: (id) => {
-        return blogsData.blogs.find((blog) => String(blog.id) === String(id)); // Match both UUIDs and numbers
+        // Fetch blog from the current state
+        return get().blogs.find((blog) => String(blog.id) === String(id));
       },
       listBlogs: () => {
         return get().blogs;
       },
     }),
     {
-      name: "blogs-storage", 
-      storage: createJSONStorage(() => localStorage), 
+      name: "blogs-storage", // Name for localStorage
+      storage: createJSONStorage(() => localStorage), // Persist state in localStorage
     }
   )
 );

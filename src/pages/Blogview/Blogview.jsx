@@ -9,7 +9,7 @@ import useBlogStore from "@/store/blogStore";
 
 export default function BlogView() {
   const { id } = useParams(); // Extract ID from the URL as a string
-  const getBlogById = useBlogStore((state) => state.getBlogById);
+  const {getBlogById} = useBlogStore();
   const blog = getBlogById(id);
 
   if (!blog) {

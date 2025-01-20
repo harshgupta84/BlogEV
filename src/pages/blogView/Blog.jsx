@@ -1,8 +1,9 @@
 import React from 'react'
+import BlogView from './Blogview'
 
 function Blog() {
   return (
-    <div>Blog</div>
+    <div><BlogView /></div>
   )
 }
 
