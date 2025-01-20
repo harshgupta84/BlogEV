@@ -10,6 +10,7 @@ import MyNotes from "./pages/noteList/MyNotes";
 import Blogview  from "./pages/Blogview/Blogview";
 import CreateBlog from "./pages/CreateBlog/CreateBlog";
 import BlogView from "./pages/Blogview/Blogview";
+import Blogview from "./pages/Blogview/Blogview";
 
 function App() {
   return (
