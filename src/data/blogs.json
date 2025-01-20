@@ -2,14 +2,15 @@
   "blogs": [
     {
       "id": 1,
-      "title": "React Use State",
-      "content": "# This is the sample data",
-      "createdAt": "2025-01-18T12:34:56Z",
-      "author": "Harsh G",
-      "category": "Web Dev",
-      "pic": "./profile.png",
-      "likes":"70"
+      "title": "Mastering React: A Beginner's Journey",
+      "content": "### React is one of the most popular JavaScript libraries for building user interfaces. Its component-based architecture and virtual DOM make it a powerful tool for developers.\n\n## What is React?\nReact is a **JavaScript library** for creating dynamic web applications. It was developed by Facebook and is widely used in the industry.\n\n### Why Use React?\n1. **Reusable Components**: Write once, reuse everywhere.\n2. **Virtual DOM**: Faster updates to the UI.\n3. **Strong Ecosystem**: Compatible with tools like Redux and React Router.\n\n## Getting Started\nTo get started with React, you need to set up your environment. Here’s a quick setup guide:\n\n### Step 1: Install Node.js\nDownload and install Node.js from [nodejs.org](https://nodejs.org).\n\n### Step 2: Create a New React App\nUse the Create React App CLI tool to bootstrap a project:\n```bash\nnpx create-react-app my-app\ncd my-app\nnpm start\n```\n\n### Step 3: Write Your First Component\nHere’s an example of a simple React component:\n\n```javascript\nimport React from 'react';\n\nfunction WelcomeMessage() {\n  return <h1>Welcome to React!</h1>;\n}\n\nexport default WelcomeMessage;\n```\n\n## Advanced Concepts\nOnce you're comfortable with the basics, explore advanced topics like:\n- **React Hooks**: Manage state and side effects in functional components.\n- **Context API**: Share state across your application without prop drilling.\n- **React Router**: Add navigation and routing to your app.\n\n## Conclusion\nReact is a powerful library that can help you build scalable and maintainable web applications. Start small, build projects, and explore its ecosystem to master React.",
+      "createdAt": "2025-01-19T14:00:00Z",
+      "author": "Jane Doe",
+      "category": "Web Development",
+      "pic": "https://wsrv.nl/?url=https://codedamn-blog.s3.amazonaws.com/wp-content/uploads/2021/11/11135254/Screenshot-2021-11-11-192231-300x249.jpg&w=1920&q=75&output=webp",
+      "likes": 150
     },
+    
     {
       "id": 2,
       "title": "Zustand Use Case",

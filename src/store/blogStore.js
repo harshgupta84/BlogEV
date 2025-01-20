@@ -23,6 +23,9 @@ const useBlogStore = create((set) => ({
       ],
     }));
   },
+  getBlogById: (id) => {
+    return blogsData.blogs.find((blog) => String(blog.id) === String(id)); // Match both UUIDs and numbers
+  },
 }));
 
 export default useBlogStore;
