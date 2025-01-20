@@ -1,14 +1,10 @@
-import React from "react";
 import BlogPostCard from "./BlogPostCard";
-import { Link } from "react-router-dom";
+import { blogs } from "../../data/blogs.json";
 import DotPattern from "@/components/ui/dot-pattern";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 import { BorderBeam } from "@/components/ui/border-beam";
-import useBlogStore from "@/store/blogStore";
-
 export default function BlogPosts() {
-  const blogs = useBlogStore((state) => state.blogs); // Fetch blogs from Zustand store
-
   return (
     <div>
       <DotPattern
@@ -16,10 +12,10 @@ export default function BlogPosts() {
           "inset-4 z-0 [mask-image:radial-gradient(40vw_circle_at_center,white,transparent)]"
         )}
       />
-      <div className="mx-28 p-4">
+      <div className=" mx-28 p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.map((blog) => (
-            <Link key={blog.id} to={`/blog/view/${blog.id}`}>
+            <Link to={`/blog/view/${blog.id}`}>
               <div className="relative">
                 <BorderBeam
                   className="rounded-2xl"
@@ -27,7 +23,7 @@ export default function BlogPosts() {
                   duration={9}
                   delay={8}
                 />
-                <BlogPostCard {...blog} />
+                <BlogPostCard key={blog.id} {...blog} />
               </div>
             </Link>
           ))}

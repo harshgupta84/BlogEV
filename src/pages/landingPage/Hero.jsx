@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import { OrbitingCirclesDemo } from "./OrbitingCirclesDemo";
 import AnimatedShinyText from "@/components/ui/animated-shiny-text";
 import { useNavigate } from "react-router-dom";
+
+
 function Hero() {
   const navigate=useNavigate();
   return (
@@ -38,7 +40,7 @@ function Hero() {
                   "group rounded-full border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800"
                 )}
                 onClick={() => {
-                  navigate("/mynotes");
+                  navigate("/myblogs");
                 }}
               >
                 <AnimatedShinyText className="text-1xl inline-flex items-center text-black justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">

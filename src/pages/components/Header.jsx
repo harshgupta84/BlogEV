@@ -21,14 +21,8 @@ function Header() {
       href: "/",
     },
     {
-      title: "Services",
-      description: "Find healthcare services and support near you",
-      items: [
-        { title: "Create Your Own Blog", href: "/soon" },
-        { title: "Instant Share", href: "/soon" },
-        { title: "MD to PDF", href: "/soon" },
-        { title: "Recommended Blogs", href: "/soon" },
-      ],
+      title: "My Blogs",
+      href: "/myblogs",
     },
     {
       title: "About Us",
@@ -90,7 +84,7 @@ function Header() {
 
               <div className="flex items-center space-x-4">
                 <ThemeSwitcher />
-                <Button className="dark:bg-white dark:text-black" onClick={() => navigate("/CreateBlog")}>
+                <Button className="dark:bg-white dark:text-black" onClick={() => navigate("/blog/create")}>
                   Write
                   <PencilLine className="ml-2 h-4 w-4" />
                 </Button>
@@ -144,7 +138,7 @@ function Header() {
                   <Button
                     className="w-full justify-start"
                     onClick={() => {
-                      navigate("/CreateBlog");
+                      navigate("/blog/create");
                       setIsOpen(false);
                     }}
                   >

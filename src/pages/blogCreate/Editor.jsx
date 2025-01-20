@@ -22,25 +22,22 @@ console.log("Hello, Markdown!");
 `);
 
   const [author, setAuthor] = useState('John Doe'); // Placeholder author
-  const [category, setCategory] = useState('Technology'); // Placeholder category
-  const [pic, setPic] = useState(''); // Placeholder picture URL
+  const [category, setCategory] = useState('Technology'); 
+  const [pic, setPic] = useState(''); 
   const { addBlog } = useBlogStore(); // Get the addBlog function from the store
   const { toast } = useToast(); // Use toast for notifications
 
-  // Function to generate title from the first line of markdown
+ 
   const getTitle = (markdown) => {
     const firstLine = markdown.split("\n")[0];
     return firstLine.startsWith("#") ? firstLine.replace(/^#\s*/, "") : "Untitled Blog";
   };
 
-  // Handle save functionality
+ 
   const handleSave = () => {
-    const title = getTitle(markdown); // Extract title from markdown
-
-    // Add the blog to the Zustand store
+    const title = getTitle(markdown); 
     addBlog(title, markdown, author, category, pic);
 
-    // Show success toast using ShadCN's toast system
     toast({
       title: `Blog "${title}" saved successfully!`,
       description: "Your blog has been saved to the system.",
@@ -49,9 +46,9 @@ console.log("Hello, Markdown!");
 
     // Reset the markdown content
     setMarkdown("# New Blog...");
-    setAuthor(''); // Reset author input (or you can keep a default value)
-    setCategory(''); // Reset category input (or keep a default)
-    setPic(''); // Reset pic URL input (if needed)
+    setAuthor(''); 
+    setCategory(''); 
+    setPic(''); 
   };
 
   return (
@@ -75,7 +72,7 @@ console.log("Hello, Markdown!");
             placeholder="Write your Markdown here..."
           ></textarea>
 
-          {/* Preview Section */}
+         
           <div className="w-1/2 p-4 overflow-auto bg-neutral-50 dark:bg-neutral-900 dark:text-white">
             <ReactMarkdown
               className="prose dark:prose-invert"
