@@ -20,7 +20,7 @@ export default function BlogPosts() {
       <div className=" mx-28 p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.map((blog) => (
-            <Link to={`/blog/view/${blog.id}`}>
+            
               <div className="relative">
                 <BorderBeam
                   className="rounded-2xl"
@@ -30,7 +30,7 @@ export default function BlogPosts() {
                 />
                 <BlogPostCard key={blog.id} {...blog} />
               </div>
-            </Link>
+       
           ))}
         </div>
       </div>

@@ -5,6 +5,7 @@ import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github.css";  
 import useBlogStore from "@/store/blogStore";  
 import { useToast } from "@/hooks/use-toast";  
+import { useNavigate } from "react-router-dom";
 
 function Editor() {
   const [markdown, setMarkdown] = useState(`# Welcome to BlogEV\nStart typing your Markdown here...
@@ -26,7 +27,7 @@ console.log("Hello, Markdown!");
   const [pic, setPic] = useState(''); 
   const { addBlog } = useBlogStore(); // Get the addBlog function from the store
   const { toast } = useToast(); // Use toast for notifications
-
+  const navigate=useNavigate();
  
   const getTitle = (markdown) => {
     const firstLine = markdown.split("\n")[0];
@@ -49,6 +50,7 @@ console.log("Hello, Markdown!");
     setAuthor(''); 
     setCategory(''); 
     setPic(''); 
+    navigate("/myblogs")
   };
 
   return (
