@@ -5,11 +5,8 @@ import { Link } from "react-router-dom";
 import { BorderBeam } from "@/components/ui/border-beam";
 import useBlogStore from "@/store/blogStore";
 
-
-
-
 export default function BlogPosts() {
-  const {blogs } = useBlogStore();
+  const { blogs } = useBlogStore();
   return (
     <div>
       <DotPattern
@@ -17,19 +14,10 @@ export default function BlogPosts() {
           "inset-4 z-0 [mask-image:radial-gradient(40vw_circle_at_center,white,transparent)]"
         )}
       />
-      <div className=" mx-28 p-4">
+      <div className="mx-28">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.map((blog) => (
-              <div className="relative">
-                <BorderBeam
-                  className="rounded-2xl"
-                  size={100}
-                  duration={9}
-                  delay={8}
-                />
-                <BlogPostCard key={blog.id} blog={blog} />
-              </div>
-       
+            <BlogPostCard key={blog.id} blog={blog} />
           ))}
         </div>
       </div>

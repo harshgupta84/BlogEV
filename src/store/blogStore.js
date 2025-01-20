@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { v4 as uuidv4 } from "uuid";
+import blogs from "../data/blogs.json"
  // Ensure this points to your blogs.json file
 
 const useBlogStore = create(
   persist(
     (set, get) => ({
-      blogs: [], // Initialize state with blogs from blogs.json
+      blogs: blogs.blogs|| [], // Initialize state with blogs from blogs.json
       addBlog: (title, content, author, category, pic) => {
         const newBlog = {
           id: uuidv4(), // Generate unique ID for new blog
