@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { v4 as uuidv4 } from "uuid";
-import blogsData from "../data/blogs.json"; // Ensure this points to your blogs.json file
+ // Ensure this points to your blogs.json file
 
 const useBlogStore = create(
   persist(

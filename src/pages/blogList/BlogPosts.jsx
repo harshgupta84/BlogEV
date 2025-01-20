@@ -20,7 +20,6 @@ export default function BlogPosts() {
       <div className=" mx-28 p-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.map((blog) => (
-            
               <div className="relative">
                 <BorderBeam
                   className="rounded-2xl"
@@ -28,7 +27,7 @@ export default function BlogPosts() {
                   duration={9}
                   delay={8}
                 />
-                <BlogPostCard key={blog.id} {...blog} />
+                <BlogPostCard key={blog.id} blog={blog} />
               </div>
        
           ))}

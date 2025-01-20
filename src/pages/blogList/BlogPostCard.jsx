@@ -48,11 +48,11 @@ export default function BlogPostCard({ blog }) {
           <span className="text-sm font-medium">{author}</span>
         </div>
         <div className="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex gap-3">
-          {/* Edit Icon */}
+         
           <Link to={`/blog/update/${id}`}>
             <PencilLine className="cursor-pointer" />
           </Link>
-          {/* Delete Icon */}
+          
           <Trash className="cursor-pointer" onClick={deleteHandler} />
         </div>
       </div>

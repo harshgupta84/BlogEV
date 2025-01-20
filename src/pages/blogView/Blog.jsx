@@ -3,7 +3,7 @@ import BlogView from './Blogview'
 
 function Blog() {
   return (
-    <div><BlogView /></div>
+    <div className=' mt-24'><BlogView /></div>
   )
 }
 
