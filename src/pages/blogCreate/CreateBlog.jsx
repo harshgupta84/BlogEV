@@ -9,9 +9,9 @@ const CreateBlog = () => {
     <div>
         
         <div className="mt-24">
-          <ToastProvider> {/* Wrapping with ToastProvider */}
+          <ToastProvider> 
           <Editor />
-          <Toaster /> {/* This will render all the toast notifications */}
+          <Toaster /> 
           </ToastProvider>
         </div> 
        
