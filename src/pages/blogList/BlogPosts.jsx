@@ -14,8 +14,8 @@ export default function BlogPosts() {
           "inset-4 z-0 [mask-image:radial-gradient(40vw_circle_at_center,white,transparent)]"
         )}
       />
-      <div className="mx-28">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className=" mx-20">
+        <div className="flex flex-col gap-6">
           {blogs.map((blog) => (
             <BlogPostCard key={blog.id} blog={blog} />
           ))}

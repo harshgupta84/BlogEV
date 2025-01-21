@@ -62,6 +62,14 @@ module.exports = {
   				'100%': {
   					'offset-distance': '100%'
   				}
+  			},
+  			pulse: {
+  				'0%, 100%': {
+  					boxShadow: '0 0 0 0 var(--pulse-color)'
+  				},
+  				'50%': {
+  					boxShadow: '0 0 0 8px var(--pulse-color)'
+  				}
   			}
   		},
   		animation: {
@@ -71,7 +79,8 @@ module.exports = {
   			'shiny-text': 'shiny-text 8s infinite',
   			'background-position-spin': 'background-position-spin 3000ms infinite alternate',
   			shine: 'shine var(--duration) infinite linear',
-  			'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear'
+  			'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
+  			pulse: 'pulse var(--duration) ease-out infinite'
   		}
   	}
   },

@@ -1,9 +1,7 @@
 
 import React from "react";
 import { useParams } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
+import MarkdownPreview from '@uiw/react-markdown-preview';
 import "highlight.js/styles/github.css"; // Syntax highlighting styles
 import useBlogStore from "@/store/blogStore";
 
@@ -19,9 +17,7 @@ export default function BlogView() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="bg-white dark:bg-neutral-900 shadow-lg rounded-lg p-6 max-w-4xl mx-auto">
-        {/* Blog Title */}
         <h1 className="text-4xl font-bold mb-4 text-left">{blog.title}</h1>
-        {/* Blog Metadata */}
         <p className="text-gray-600 dark:text-gray-300 text-sm mb-6 text-left">
           By {blog.author} | {new Date(blog.createdAt).toLocaleDateString()} |{" "}
           {blog.category}
@@ -36,12 +32,7 @@ export default function BlogView() {
         )}
         {/* Blog Content */}
         <div className="prose dark:prose-invert max-w-none">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]} // Enable GitHub-flavored Markdown
-            rehypePlugins={[rehypeHighlight]} // Enable syntax highlighting
-          >
-            {blog.content}
-          </ReactMarkdown>
+        <MarkdownPreview source={blog.content} style={{background:"transparent"}}/>
         </div>
       </div>
     </div>
