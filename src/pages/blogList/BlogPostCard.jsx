@@ -35,8 +35,8 @@ export default function BlogPostCard({ blog }) {
   };
 
   return (
-    <div className=" relative">
-      <BorderBeam className="rounded-2xl" size={150} duration={9} delay={8} />
+    <div className="relative">
+      <BorderBeam className="rounded-2xl" size={100} duration={9} delay={8} />
       <Card className="shadow-md border dark:border-gray-700">
         {/* Header Section with Author Info and Edit/Delete Icons */}
         <div className="flex items-center justify-between px-4 pt-4">
@@ -49,12 +49,16 @@ export default function BlogPostCard({ blog }) {
             </Avatar>
             <span className="text-sm font-medium">{author}</span>
           </div>
-          <div className="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex gap-3">
-            <Link to={`/blog/update/${id}`}>
-              <PencilLine className="cursor-pointer" />
-            </Link>
-
-            <Trash className="cursor-pointer" onClick={deleteHandler} />
+          <div className="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex gap-7">
+            <div>
+              <Link to={`/blog/update/${id}`}>
+                <PencilLine className="cursor-pointer" />
+              </Link>
+            </div>
+            <div>
+              <Trash className="cursor-pointer" onClick={deleteHandler} />
+            </div>
+            
           </div>
         </div>
 
