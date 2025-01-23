@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { PulsatingButton } from "@/components/ui/pulsating-button";
 import { chatSession } from "@/pages/blogCreate/AiModal";
-
+import LoadingSpinner from "../../utils/LoadingSpinner"
 function Editor() {
   const [markdown, setMarkdown] = useState(`# Welcome to BlogEV\nStart typing your Markdown here...
 
@@ -26,8 +26,9 @@ console.log("Hello, Markdown!");
   const [author, setAuthor] = useState("John Doe"); // Placeholder author
   const [category, setCategory] = useState("Technology");
   const [pic, setPic] = useState("");
-  const { addBlog } = useBlogStore(); // Get the addBlog function from the store
-  const { toast } = useToast(); // Use toast for notifications
+  const { addBlog } = useBlogStore(); 
+  const { toast } = useToast(); 
+  const [loading,setLoading]=useState(false);
   const navigate = useNavigate();
 
   // Helper function to extract the title from the first line of Markdown
@@ -59,10 +60,12 @@ console.log("Hello, Markdown!");
   const generateContent = async () => {
     const title = getTitle(markdown);
     const prompt = `Generate content for the blog in Markdown  with the title: "${title} and add title at top and do not anything except the main content of blog and dont specify it as markdown"`;
- 
+    
     try {
+      setLoading(true);
       const result = await chatSession.sendMessage(prompt);
       const resultText = await result.response.text();
+      setLoading(false);
       setMarkdown(resultText);
       toast({
         title: "Blog content generated!",
@@ -82,6 +85,7 @@ console.log("Hello, Markdown!");
 
   return (
     <div className="flex flex-col min-h-screen bg-background relative">
+      {loading && <LoadingSpinner title={"Let the Magic Happen ✨"}/>}
       <div className="container mx-auto max-w-[1200px] flex-1 flex flex-col items-center justify-center z-10 relative">
         <div className="text-center mb-8">
           <h1 className="text-5xl font-extrabold tracking-tight bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] bg-clip-text text-transparent">
