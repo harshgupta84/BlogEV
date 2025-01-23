@@ -1,5 +1,5 @@
 import { MoveRight, PhoneCall, Search } from "lucide-react";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { MarqueeDemo } from "./MarqueeDemo";
 import DotPattern from "@/components/ui/dot-pattern";
 import { cn } from "@/lib/utils";
@@ -23,11 +23,14 @@ function Hero() {
         <div className="container relative z-10 mx-auto max-w-[1200px] flex items-center justify-center">
           <div className="flex gap-8 py-12 lg:py-10 items-center justify-center flex-col text-center">
             <div className="flex gap-6 flex-col items-center">
-              <h1 className="text-5xl md:text-7xl max-w-3xl tracking-tighter text-center font-regular">
-                <span className="bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] bg-clip-text text-transparent">
-                  Your Blogging Journey Begins Here
-                </span>
-              </h1>
+
+
+              {/* need to make a modular component of this h1 */}
+                  <h1 className="text-5xl md:text-7xl max-w-3xl tracking-tighter text-center font-regular">
+                    <span className="bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] bg-clip-text text-transparent">
+                      Your Blogging Journey Begins Here
+                    </span>
+                  </h1>
 
               <p className="text-2xl md:text-2xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center mx-auto dark:text-white">
                 <span className="font-bold italic text-[#8CCC4C]">BlogEV</span>{" "}

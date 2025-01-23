@@ -7,7 +7,6 @@ import CreateBlog from "./pages/blogCreate/CreateBlog";
 import UpdateBlog from "./pages/blogUpdate/UpdateBlog";
 import Header from "./pages/components/Header";
 
-import Blogview from "./pages/Blogview/Blogview";
 
 function App() {
   return (
@@ -21,8 +20,6 @@ function App() {
             <Route path="/blog/create" Component={CreateBlog}></Route>
             <Route path="/blog/view/:id" Component={Blog}></Route>
             <Route path="/blog/update/:id" Component={UpdateBlog}></Route>
-            <Route path="/CreateBlog" Component={CreateBlog}></Route>
-            <Route path="/blog/view/:id" element={<Blogview />} />
         </Routes>
       </BrowserRouter>
     </div>
