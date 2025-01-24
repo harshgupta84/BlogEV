@@ -32,7 +32,7 @@ export default function BlogView() {
         )}
         {/* Blog Content */}
         <div className="prose dark:prose-invert max-w-none">
-        <MarkdownPreview source={blog.content} style={{background:"transparent"}}/>
+        <MarkdownPreview source={blog.content} style={{background:"transparent", color: "inherit"}}/>
         </div>
       </div>
     </div>
