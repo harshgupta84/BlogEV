@@ -47,7 +47,6 @@ export default function BlogView() {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Command Panel */}
-      <Toaster/>
       <div className="flex flex-col sm:flex-row justify-center items-center sm:items-stretch sm:space-x-4 space-y-4 sm:space-y-0 mb-6 p-4 border rounded-lg bg-gray-100 dark:bg-neutral-800 dark:border-white mx-4 sm:mx-8 lg:mx-16 ">
         {/* Update Note Button */}
         <Button className="flex items-center space-x-2 text-lg sm:text-xl">
@@ -57,7 +56,7 @@ export default function BlogView() {
 
         {/* Delete Note Button */}
         <Button
-          variant="destructive"
+          
           className="flex items-center space-x-2 text-lg sm:text-xl"
           onClick={deleteHandler}
         >
@@ -106,6 +105,7 @@ export default function BlogView() {
           />
         </div>
       </div>
+      <Toaster/>
     </div>
   );
 }
