@@ -16,7 +16,7 @@ export default function BlogPosts() {
       />
       <div className=" mx-20">
         <div className="flex flex-col gap-6">
-          {blogs.map((blog) => (
+          {blogs.toReversed().map((blog) => (
             <BlogPostCard key={blog.id} blog={blog} />
           ))}
         </div>
