@@ -6,6 +6,7 @@ import useBlogStore from "@/store/blogStore";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Edit3, Trash2, Share2 } from "lucide-react"; // Lucide icons
+import { Toaster } from "@/components/ui/toaster";
 
 export default function BlogView() {
   const { id } = useParams(); // Extract ID from the URL
@@ -46,6 +47,7 @@ export default function BlogView() {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Command Panel */}
+      <Toaster/>
       <div className="flex flex-col sm:flex-row justify-center items-center sm:items-stretch sm:space-x-4 space-y-4 sm:space-y-0 mb-6 p-4 border rounded-lg bg-gray-100 dark:bg-neutral-800 dark:border-white mx-4 sm:mx-8 lg:mx-16 ">
         {/* Update Note Button */}
         <Button className="flex items-center space-x-2 text-lg sm:text-xl">
