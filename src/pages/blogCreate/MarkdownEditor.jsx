@@ -41,7 +41,7 @@ function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-background relative">
+    <div className="flex flex-col min-h-screen bg-background relative mb-4 mx-3">
       {loading && <LoadingSpinner title="Let the Magic Happen ✨" />}
       <div className="container mx-auto max-w-[1200px] flex-1 flex flex-col items-center justify-center z-10 relative">
         <div className="text-center mb-8">
