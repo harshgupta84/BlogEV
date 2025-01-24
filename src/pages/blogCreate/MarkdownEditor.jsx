@@ -81,7 +81,7 @@ function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
                 isMobile && !isPreviewVisible ? "hidden" : ""
               }`}
             >
-              <MarkdownPreview source={markdown} style={{ background: "transparent" }} />
+              <MarkdownPreview source={markdown} style={{ background: "transparent" ,color:"inherit"}} />
             </div>
           ) : null}
         </div>
