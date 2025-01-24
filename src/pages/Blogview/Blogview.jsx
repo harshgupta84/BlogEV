@@ -1,38 +1,107 @@
-
 import React from "react";
-import { useParams } from "react-router-dom";
-import MarkdownPreview from '@uiw/react-markdown-preview';
+import { useParams, useNavigate, Link } from "react-router-dom";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 import "highlight.js/styles/github.css"; // Syntax highlighting styles
 import useBlogStore from "@/store/blogStore";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import { Edit3, Trash2, Share2 } from "lucide-react"; // Lucide icons
 
 export default function BlogView() {
-  const { id } = useParams(); // Extract ID from the URL as a string
-  const {getBlogById} = useBlogStore();
+  const { id } = useParams(); // Extract ID from the URL
+  const { getBlogById, deleteBlog } = useBlogStore();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
   const blog = getBlogById(id);
 
   if (!blog) {
-    return <p className="text-center text-xl text-red-500">Blog not found!</p>;
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <p className="text-center text-xl text-red-500 font-semibold">
+          Blog not found!
+        </p>
+      </div>
+    );
   }
+
+  const deleteHandler = () => {
+    deleteBlog(id);
+    navigate("/myblogs");
+    toast({
+      title: "Blog deleted successfully!",
+      description: `Your blog "${blog.title}" has been deleted.`,
+    });
+  };
+
+  const shareHandler = () => {
+    const blogUrl = `${window.location.origin}/blog/${id}`;
+    navigator.clipboard.writeText(blogUrl);
+    toast({
+      title: "Link copied to clipboard!",
+      description: `Share this link: ${blogUrl}`,
+    });
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="bg-white dark:bg-neutral-900 shadow-lg rounded-lg p-6 max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-4 text-left">{blog.title}</h1>
-        <p className="text-gray-600 dark:text-gray-300 text-sm mb-6 text-left">
-          By {blog.author} | {new Date(blog.createdAt).toLocaleDateString()} |{" "}
-          {blog.category}
+      {/* Command Panel */}
+      <div className="flex flex-col sm:flex-row justify-center items-center sm:items-stretch sm:space-x-4 space-y-4 sm:space-y-0 mb-6 p-4 border rounded-lg bg-gray-100 dark:bg-neutral-800 dark:border-white mx-4 sm:mx-8 lg:mx-16 ">
+        {/* Update Note Button */}
+        <Button className="flex items-center space-x-2 text-lg sm:text-xl">
+          <Edit3 size={18} />
+          <Link to={`/blog/update/${id}`}>Update Note</Link>
+        </Button>
+
+        {/* Delete Note Button */}
+        <Button
+          variant="destructive"
+          className="flex items-center space-x-2 text-lg sm:text-xl"
+          onClick={deleteHandler}
+        >
+          <Trash2 size={18} />
+          <span>Delete Note</span>
+        </Button>
+
+        {/* Share Link Button */}
+        <Button
+          className="flex items-center space-x-2 text-lg sm:text-xl"
+          onClick={shareHandler}
+        >
+          <Share2 size={18} />
+          <span>Share Link</span>
+        </Button>
+      </div>
+
+      {/* Blog Content */}
+      <div className="bg-white dark:bg-neutral-900 shadow-lg rounded-lg p-6 max-w-3xl mx-4 sm:mx-auto">
+        {/* Blog Title */}
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 text-left">
+          {blog.title}
+        </h1>
+
+        {/* Metadata */}
+        <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base mb-6 text-left">
+          By <span className="font-semibold">{blog.author}</span> |{" "}
+          {new Date(blog.createdAt).toLocaleDateString()} |{" "}
+          <span className="italic">{blog.category}</span>
         </p>
+
         {/* Blog Image */}
         {blog.pic && (
           <img
             src={blog.pic}
-            alt={blog.title}
-            className="rounded-md mb-6 max-h-72 object-cover mx-auto"
+            alt={`Image for blog "${blog.title}"`}
+            className="rounded-md mb-6 w-full max-h-80 object-cover"
           />
         )}
+
         {/* Blog Content */}
-        <div className="prose dark:prose-invert max-w-none">
-        <MarkdownPreview source={blog.content} style={{background:"transparent", color: "inherit"}}/>
+        <div className="prose dark:prose-invert max-w-none leading-relaxed">
+          <MarkdownPreview
+            source={blog.content}
+            style={{ background: "transparent", color: "inherit" }}
+          />
         </div>
       </div>
     </div>

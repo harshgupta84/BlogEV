@@ -20,8 +20,9 @@ function MyBlogs() {
       </div>
       <div className="mt-5 ">
         <ToastProvider>
+        <Toaster />
           <BlogPosts />
-          <Toaster />
+          
         </ToastProvider>
       </div>
     </div>
