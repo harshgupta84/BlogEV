@@ -17,25 +17,14 @@ function UpdateBlog() {
 
   const existingBlog = getBlogById(id);
 
-  // Extract the title from the first line of Markdown
-  const getTitle = (markdown) => {
-    const firstLine = markdown.split("\n")[0];
-    return firstLine.startsWith("#") ? firstLine.replace(/^#\s*/, "") : "Untitled Blog";
-  };
-
   useEffect(() => {
     if (existingBlog) {
       setMarkdown(existingBlog.content);
       setAuthor(existingBlog.author);
       setCategory(existingBlog.category);
-      setTitle(getTitle(existingBlog.content)); // Initialize title from the existing blog content
+      setTitle(existingBlog.content.split("\n")[0].replace(/^#\s*/, "") || "Untitled Blog");
     }
   }, [existingBlog]);
-
-  useEffect(() => {
-    // Update the title whenever the markdown content changes
-    setTitle(getTitle(markdown));
-  }, [markdown]);
 
   const handleUpdate = () => {
     const updatedBlog = {
@@ -43,7 +32,7 @@ function UpdateBlog() {
       content: markdown,
       author,
       category,
-      title, // Use the dynamically updated title
+      title: markdown.split("\n")[0].replace(/^#\s*/, "") || "Untitled Blog",
       updatedAt: new Date().toISOString(),
     };
 
@@ -67,7 +56,7 @@ function UpdateBlog() {
   }
 
   return (
-    <div className="mt-24 ">
+    <div className="mt-24">
       <MarkdownEditor
         markdown={markdown}
         setMarkdown={setMarkdown}

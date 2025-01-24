@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import "highlight.js/styles/github.css";
 import { Button } from "@/components/ui/button";
+import { PulsatingButton } from "@/components/ui/pulsating-button";
+import LoadingSpinner from "@/utils/LoadingSpinner";
+import { chatSession } from "@/pages/blogCreate/AiModal";
 
 function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
   const [isPreviewVisible, setIsPreviewVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Initial check for mobile
+  const [loading, setLoading] = useState(false);
 
   // Update `isMobile` when the screen size changes
   useEffect(() => {
@@ -15,14 +19,30 @@ function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
 
     window.addEventListener("resize", handleResize);
 
-    // Cleanup the event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
+  const generateContent = async () => {
+    const title = markdown.split("\n")[0].replace(/^#\s*/, "") || "Untitled Blog";
+    const prompt = `Generate content for the blog in Markdown with the title: "${title}" and add the title at the top. Do not include anything else except the main content of the blog.`;
+
+    try {
+      setLoading(true);
+      const result = await chatSession.sendMessage(prompt);
+      const resultText = await result.response.text();
+      setLoading(false);
+      setMarkdown(resultText);
+    } catch (error) {
+      console.error("Error generating blog content:", error);
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-background relative">
+      {loading && <LoadingSpinner title="Let the Magic Happen ✨" />}
       <div className="container mx-auto max-w-[1200px] flex-1 flex flex-col items-center justify-center z-10 relative">
         <div className="text-center mb-8">
           <h1 className="text-5xl font-extrabold tracking-tight bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] bg-clip-text text-transparent">
@@ -31,6 +51,12 @@ function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
           <p className="text-lg text-muted-foreground mt-4">
             Create and preview your Markdown.
           </p>
+        </div>
+
+        <div className="m-3">
+          <PulsatingButton onClick={generateContent}>
+            ✨ Generate Content for Blog
+          </PulsatingButton>
         </div>
 
         <div
@@ -62,7 +88,6 @@ function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
 
         {/* Buttons Section */}
         <div className="flex gap-4 mt-6">
-          {/* Save Button */}
           <Button
             className="bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] text-white"
             onClick={onSubmit}
@@ -86,3 +111,4 @@ function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
 }
 
 export default MarkdownEditor;
+

@@ -25,15 +25,17 @@ function CreateBlog() {
   };
 
   return (
-    <div className="mt-24 ">
-        <MarkdownEditor
-          markdown={markdown}
-          setMarkdown={setMarkdown}
-          onSubmit={handleSave}
-          buttonText="Save Blog"
-        />
+    <div className="mt-24">
+      <MarkdownEditor
+        markdown={markdown}
+        setMarkdown={setMarkdown}
+        onSubmit={handleSave}
+        buttonText="Save Blog"
+      />
     </div>
   );
 }
 
 export default CreateBlog;
+
+
