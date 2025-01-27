@@ -40,7 +40,17 @@ function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
   };
   if(loading){
     return (
-       <LoadingSpinner title="Let the Magic Happen ✨" />
+      <div className="flex flex-col items-center  mx-8">
+      <div className="bg-neutral-200 dark:bg-neutral-700 rounded-md h-8 w-1/3 mb-4 animate-pulse"></div>
+      <div className="flex gap-4 w-full">
+        <div className="flex-1 bg-neutral-200 dark:bg-neutral-700 rounded-md h-96 animate-pulse"></div>
+        <div className="flex-1 bg-neutral-200 dark:bg-neutral-700 rounded-md h-96 animate-pulse"></div>
+      </div>
+      <div className="flex gap-4 mt-6">
+        <div className="bg-neutral-200 dark:bg-neutral-700 rounded-md h-12 w-32 animate-pulse"></div>
+        <div className="bg-neutral-200 dark:bg-neutral-700 rounded-md h-12 w-32 animate-pulse"></div>
+      </div>
+    </div>
     )
   }
 
