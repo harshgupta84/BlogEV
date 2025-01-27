@@ -11,7 +11,6 @@ function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Initial check for mobile
   const [loading, setLoading] = useState(false);
 
-  // Update `isMobile` when the screen size changes
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -39,10 +38,15 @@ function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
       setLoading(false);
     }
   };
+  if(loading){
+    return (
+       <LoadingSpinner title="Let the Magic Happen ✨" />
+    )
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-background relative mb-4 mx-3">
-      {loading && <LoadingSpinner title="Let the Magic Happen ✨" />}
+    
       <div className="container mx-auto max-w-[1200px] flex-1 flex flex-col items-center justify-center z-10 relative">
         <div className="text-center mb-8">
           <h1 className="text-5xl font-extrabold tracking-tight bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] bg-clip-text text-transparent">
