@@ -47,17 +47,20 @@ export default function BlogView() {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Command Panel */}
-      <div className="flex flex-col sm:flex-row justify-center items-center sm:items-stretch sm:space-x-4 space-y-4 sm:space-y-0 mb-6 p-4 border rounded-lg bg-gray-100 dark:bg-neutral-800 dark:border-white mx-4 sm:mx-8 lg:mx-16 ">
+      <div
+        className="flex flex-col sm:flex-row justify-center items-center sm:items-stretch sm:space-x-4 space-y-4 sm:space-y-0 mb-6 p-4  mx-4 sm:mx-8 lg:mx-16"
+      >
         {/* Update Note Button */}
-        <Button className="flex items-center space-x-2 text-lg sm:text-xl">
+        <Button
+          className="flex items-center space-x-2 text-lg sm:text-xl bg-gray-200 dark:bg-neutral-700 hover:bg-gray-300 dark:hover:bg-neutral-600 transition-colors"
+        >
           <Edit3 size={18} />
           <Link to={`/blog/update/${id}`}>Update Note</Link>
         </Button>
 
         {/* Delete Note Button */}
         <Button
-          
-          className="flex items-center space-x-2 text-lg sm:text-xl"
+          className="flex items-center space-x-2 text-lg sm:text-xl bg-red-500 dark:bg-red-700 hover:bg-red-600 dark:hover:bg-red-600 text-white transition-colors"
           onClick={deleteHandler}
         >
           <Trash2 size={18} />
@@ -66,7 +69,7 @@ export default function BlogView() {
 
         {/* Share Link Button */}
         <Button
-          className="flex items-center space-x-2 text-lg sm:text-xl"
+          className="flex items-center space-x-2 text-lg sm:text-xl bg-blue-500 dark:bg-blue-700 hover:bg-blue-600 dark:hover:bg-blue-600 text-white transition-colors"
           onClick={shareHandler}
         >
           <Share2 size={18} />
@@ -105,7 +108,7 @@ export default function BlogView() {
           />
         </div>
       </div>
-      <Toaster/>
+      <Toaster />
     </div>
   );
 }
