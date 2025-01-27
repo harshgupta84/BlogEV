@@ -6,6 +6,7 @@ import Blog from "./pages/blogView/Blog";
 import CreateBlog from "./pages/blogCreate/CreateBlog";
 import UpdateBlog from "./pages/blogUpdate/UpdateBlog";
 import Header from "./pages/components/Header";
+import Bookmarked from "./pages/bookmarks/Bookmarked";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route path="/blog/create" Component={CreateBlog}></Route>
             <Route path="/blog/view/:id" Component={Blog}></Route>
             <Route path="/blog/update/:id" Component={UpdateBlog}></Route>
+            <Route path="/blog/bookmarks" Component={Bookmarked}></Route>
         </Routes>
       </BrowserRouter>
     </div>

@@ -3,14 +3,16 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import "highlight.js/styles/github.css"; // Syntax highlighting styles
 import useBlogStore from "@/store/blogStore";
+import useBookmarkStore from "@/store/bookmarkStore";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Edit3, Trash2, Share2 } from "lucide-react"; // Lucide icons
+import { Edit3, Trash2, Share2, Bookmark, BookmarkPlus } from "lucide-react"; // Lucide icons
 import { Toaster } from "@/components/ui/toaster";
 
 export default function BlogView() {
   const { id } = useParams(); // Extract ID from the URL
   const { getBlogById, deleteBlog } = useBlogStore();
+  const { addBookmark, removeBookmark, isBookmarked } = useBookmarkStore();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -44,6 +46,22 @@ export default function BlogView() {
     });
   };
 
+  const toggleBookmark = () => {
+    if (isBookmarked(id)) {
+      removeBookmark(id);
+      toast({
+        title: "Bookmark removed",
+        description: `"${blog.title}" has been removed from your bookmarks.`,
+      });
+    } else {
+      addBookmark(id);
+      toast({
+        title: "Bookmark added",
+        description: `"${blog.title}" has been added to your bookmarks.`,
+      });
+    }
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Command Panel */}
@@ -67,13 +85,24 @@ export default function BlogView() {
           <span>Delete Note</span>
         </Button>
 
-        {/* Share Link Button */}
+      
         <Button
           className="flex items-center space-x-2 text-lg sm:text-xl bg-blue-500 dark:bg-blue-700 hover:bg-blue-600 dark:hover:bg-blue-600 text-white transition-colors"
           onClick={shareHandler}
         >
           <Share2 size={18} />
           <span>Share Link</span>
+        </Button>
+        <Button
+          className={`flex items-center space-x-2 text-lg sm:text-xl ${
+            isBookmarked(id)
+              ? "bg-yellow-500 dark:bg-yellow-700 hover:bg-yellow-600 dark:hover:bg-yellow-600 text-white"
+              : "bg-gray-200 dark:bg-neutral-700 hover:bg-gray-300 dark:hover:bg-neutral-600"
+          } transition-colors`}
+          onClick={toggleBookmark}
+        >
+          {isBookmarked(id) ? <Bookmark size={18} /> : <BookmarkPlus size={18} />}
+          <span>{isBookmarked(id) ? "Remove Bookmark" : "Add Bookmark"}</span>
         </Button>
       </div>
 
