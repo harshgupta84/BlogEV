@@ -1,51 +1,58 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { v4 as uuidv4 } from "uuid";
-import blogs from "../data/blogs.json"; // Ensure this points to your blogs.json file
+import {
+  addBlog,
+  deleteBlog,
+  updateBlog,
+  getBlogById,
+  listBlogs,
+} from "@/services/blogService";
 
 const useBlogStore = create(
   persist(
-    (set, get) => ({
-      blogs: blogs.blogs || [], // Initialize state with blogs from blogs.json
-      addBlog: (title, content, author, category, pic) => {
-        const newBlog = {
-          id: uuidv4(), // Generate unique ID for new blog
-          title,
-          content,
-          createdAt: new Date().toISOString(),
-          author,
-          category,
-          pic,
-          likes: 0,
-        };
+    (set) => ({
+      // Initialize the blogs state from the service
+      blogs: listBlogs(),
 
+      // Add a blog
+      addBlog: (title, content, author, category, pic) => {
+        const newBlog = addBlog(title, content, author, category, pic);
         set((state) => ({
           blogs: [...state.blogs, newBlog],
         }));
       },
+
+      // Delete a blog
       deleteBlog: (id) => {
+        deleteBlog(id);
         set((state) => ({
           blogs: state.blogs.filter((blog) => String(blog.id) !== String(id)),
         }));
       },
+
+      // Update a blog
       updateBlog: (id, updatedData) => {
+        const updatedBlog = updateBlog(id, updatedData);
         set((state) => ({
           blogs: state.blogs.map((blog) =>
-            String(blog.id) === String(id) ? { ...blog, ...updatedData } : blog
+            String(blog.id) === String(id) ? updatedBlog : blog
           ),
         }));
       },
+
+      // Get a blog by ID
       getBlogById: (id) => {
-        // Fetch blog from the current state
-        return get().blogs.find((blog) => String(blog.id) === String(id));
+        return getBlogById(id);
       },
+
+      // List all blogs
       listBlogs: () => {
-        return get().blogs;
+        return listBlogs();
       },
     }),
     {
-      name: "blogs-storage", // Name for localStorage
-      storage: createJSONStorage(() => localStorage), // Persist state in localStorage
+      name: "blogs-storage", // Use localStorage for persistence
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );
