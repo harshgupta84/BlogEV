@@ -36,7 +36,7 @@ export default function BlogView() {
   };
 
   const shareHandler = () => {
-    const blogUrl = `${window.location.origin}/blog/${id}`;
+    const blogUrl = `${window.location.origin}/blog/view/${id}`;
     navigator.clipboard.writeText(blogUrl);
     toast({
       title: "Link copied to clipboard!",
