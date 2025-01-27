@@ -41,7 +41,13 @@ function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
   if(loading){
     return (
       <div className="flex flex-col items-center  mx-8">
-      <div className="bg-neutral-200 dark:bg-neutral-700 rounded-md h-8 w-1/3 mb-4 animate-pulse"></div>
+        <h1 className="text-5xl font-extrabold tracking-tight bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] bg-clip-text text-transparent">
+            Markdown Editor
+          </h1>
+          <p className="text-lg text-muted-foreground mt-4">
+            Create and preview your Markdown.
+          </p>
+       
       <div className="flex gap-4 w-full">
         <div className="flex-1 bg-neutral-200 dark:bg-neutral-700 rounded-md h-96 animate-pulse"></div>
         <div className="flex-1 bg-neutral-200 dark:bg-neutral-700 rounded-md h-96 animate-pulse"></div>
