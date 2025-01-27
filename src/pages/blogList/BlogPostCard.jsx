@@ -6,14 +6,14 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { CalendarIcon, PencilLine, Trash } from "lucide-react";
+import { CalendarIcon, PencilLine, Trash, Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 import useBlogStore from "@/store/blogStore";
 import { BorderBeam } from "@/components/ui/border-beam";
-export default function BlogPostCard({ blog }) {
-  const { id, title, createdAt, author, category, pic, likes } = blog; // Destructure blog object
 
+export default function BlogPostCard({ blog }) {
+  const { id, title, createdAt, author, category, pic, likes } = blog;
   const { toast } = useToast();
   const { deleteBlog } = useBlogStore();
 
@@ -26,7 +26,7 @@ export default function BlogPostCard({ blog }) {
 
   // Delete handler with toast notification
   const deleteHandler = () => {
-    deleteBlog(id); // Perform delete operation
+    deleteBlog(id);
     toast({
       title: `Blog "${title}" deleted successfully!`,
       description: "The blog post has been removed from the system.",
@@ -34,12 +34,37 @@ export default function BlogPostCard({ blog }) {
     });
   };
 
+  // Copy link handler
+  const copyLinkHandler = () => {
+    const baseURL = window.location.origin; 
+    const link = `${baseURL}/blog/view/${id}`;
+
+    navigator.clipboard
+      .writeText(link)
+      .then(() => {
+        toast({
+          title: "Link copied!",
+          description: "The blog link has been copied to your clipboard.",
+          duration: 3000,
+        });
+      })
+      .catch((error) => {
+        console.error("Failed to copy link:", error);
+        toast({
+          title: "Error copying link",
+          description: "Something went wrong. Please try again.",
+          variant: "destructive",
+          duration: 3000,
+        });
+      });
+  };
+
   return (
     <div className="relative">
       <BorderBeam className="rounded-2xl" size={100} duration={9} delay={8} />
       <Card className="shadow-md border dark:border-gray-700">
-        {/* Header Section with Author Info and Edit/Delete Icons */}
-        <div className="flex items-center justify-between px-4 pt-4">
+        {/* Header Section with Author Info and Edit/Delete/Copy Icons */}
+        <div className="flex items-center justify-between px-4 pt-4 sm:flex-col sm:items-start sm:gap-4 md:flex-row">
           <div className="flex items-center space-x-2 text-[#8CCC4C]">
             <Avatar className="h-8 w-8 border dark:border-white">
               <AvatarImage src={pic} alt={author} />
@@ -49,7 +74,7 @@ export default function BlogPostCard({ blog }) {
             </Avatar>
             <span className="text-sm font-medium">{author}</span>
           </div>
-          <div className="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex gap-7">
+          <div className="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex gap-7 sm:mt-2 md:mt-0">
             <div>
               <Link to={`/blog/update/${id}`}>
                 <PencilLine className="cursor-pointer" />
@@ -58,11 +83,16 @@ export default function BlogPostCard({ blog }) {
             <div>
               <Trash className="cursor-pointer" onClick={deleteHandler} />
             </div>
-            
+            <div>
+              <Copy
+                className="cursor-pointer"
+                onClick={copyLinkHandler} 
+              />
+            </div>
           </div>
         </div>
 
-        {/* Blog Title */}
+        {/* Blog Title Section */}
         <Link to={`/blog/view/${id}`}>
           <CardHeader className="pb-4">
             <h2 className="text-3xl font-bold leading-tight bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] bg-clip-text text-transparent">
@@ -71,7 +101,7 @@ export default function BlogPostCard({ blog }) {
           </CardHeader>
         </Link>
 
-        {/* Blog Meta Information */}
+        {/* Blog Date Section */}
         <CardContent className="pb-2">
           <div className="flex items-center space-x-2 text-md text-muted-foreground">
             <CalendarIcon className="h-6 w-6" />
@@ -79,9 +109,9 @@ export default function BlogPostCard({ blog }) {
           </div>
         </CardContent>
 
-        {/* Footer Section with Category and Likes */}
-        <CardFooter className="flex items-center justify-between pt-4">
-          <Badge className="dark:bg-[#0098C5] text-sm">{category}</Badge>
+        {/* Blog Footer Section with Category and Likes */}
+        <CardFooter className="flex items-center justify-between pt-4 sm:flex-col sm:items-start md:flex-row">
+          <Badge className="dark:bg-[#0098C5] text-sm mb-2 md:mb-0">{category}</Badge>
           <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-300 hover:scale-110 transition-transform">
             👍 <span>{likes}</span>
           </div>
