@@ -25,8 +25,8 @@ function Header() {
       href: "/myblogs",
     },
     {
-      title: "About Us",
-      href: "/",
+      title: "Bookmarks",
+      href: "/blog/bookmarkes",
     },
   ];
 
