@@ -7,6 +7,10 @@ import CreateBlog from "./pages/blogCreate/CreateBlog";
 import UpdateBlog from "./pages/blogUpdate/UpdateBlog";
 import Header from "./pages/components/Header";
 import Bookmarked from "./pages/bookmarks/Bookmarked";
+import Register from "./pages/auth/register/Register";
+import VerifyEmail from "./pages/auth/register/VerifyEmail";
+import Login from "./pages/auth/login/Login";
+import UserProfile from "./pages/auth/profile/UserProfile";
 
 
 function App() {
@@ -17,11 +21,15 @@ function App() {
       <Header/>
         <Routes>
             <Route path="/" Component={LandingPage}></Route>
+            <Route path="auth/register" Component={Register}></Route>
+            <Route path="auth/verify-email" Component={VerifyEmail}></Route>
+            <Route path="/auth/login" Component={Login}></Route>
             <Route path="/myblogs" Component={MyBlogs}></Route>
             <Route path="/blog/create" Component={CreateBlog}></Route>
             <Route path="/blog/view/:id" Component={Blog}></Route>
             <Route path="/blog/update/:id" Component={UpdateBlog}></Route>
             <Route path="/blog/bookmarks" Component={Bookmarked}></Route>
+            <Route path="/profile" Component={UserProfile}></Route>
         </Routes>
       </BrowserRouter>
     </div>

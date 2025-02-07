@@ -4,154 +4,202 @@ import ThemeSwitcher from "../landingPage/ThemeSwitcher";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { Book, Menu, MoveRight, X,Pencil,PencilLine } from "lucide-react";
+import { Menu, X, PencilLine } from "lucide-react";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import useUserStore from "@/store/userStore";
+import useLoginStore from "@/store/loginStore";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  
+  const { isSignedIn, pic, name } = useUserStore();
+  const { logoutUser } = useLoginStore();
 
-  const navigationItems = [
-    {
-      title: "Home",
-      href: "/",
-    },
-    {
-      title: "My Blogs",
-      href: "/myblogs",
-    },
-    {
-      title: "Bookmarks",
-      href: "/blog/bookmarks",
-    },
-  ];
+  const navigationItems = isSignedIn
+    ? [
+        { title: "My Blogs", href: "/myblogs" },
+        { title: "Bookmarks", href: "/blog/bookmarks" },
+      ]
+    : [];
+
+  const handleLogout = () => {
+    logoutUser();
+    navigate("/auth/login");
+  };
 
   return (
-    <div>
-      <header className="fixed top-0 left-0 right-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4">
-          <nav className="flex h-16 items-center justify-between">
-            {/* Logo Section */}
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="text-4xl w-10 h-10 rounded-full  flex items-center justify-center shadow-lg">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto px-4">
+        <nav className="flex h-16 items-center justify-between">
+          {/* Logo Section */}
+          <Link to="/" className="flex items-center space-x-2">
+            <div className="text-4xl w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
               📝
-              </div>
-              <span className="text-xl font-bold text-[#8CCC4C]">BlogEV</span>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex md:items-center md:space-x-6">
-              <NavigationMenu>
-                <NavigationMenuList>
-                  {navigationItems.map((item) => (
-                    <NavigationMenuItem key={item.title}>
-                      {item.items ? (
-                        <>
-                          <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
-                          <NavigationMenuContent>
-                            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-                              {item.items.map((subItem) => (
-                                <li key={subItem.title}>
-                                  <Link
-                                    to={subItem.href}
-                                    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                  >
-                                    <div className="text-sm font-medium leading-none">
-                                      {subItem.title}
-                                    </div>
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </NavigationMenuContent>
-                        </>
-                      ) : (
-                        <Link
-                          to={item.href}
-                          className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-                        >
-                          {item.title}
-                        </Link>
-                      )}
-                    </NavigationMenuItem>
-                  ))}
-                </NavigationMenuList>
-              </NavigationMenu>
-
-              <div className="flex items-center space-x-4">
-                <ThemeSwitcher />
-                <Button className="dark:bg-white dark:text-black" onClick={() => navigate("/blog/create")}>
-                  Write
-                  <PencilLine className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
             </div>
+            <span className="text-xl font-bold text-[#8CCC4C]">BlogEV</span>
+          </Link>
 
-            {/* Mobile Navigation */}
-            <div className="md:hidden flex items-center space-x-4">
-              <ThemeSwitcher />
-              <button onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
-            </div>
-          </nav>
-
-          {/* Mobile Dropdown Menu */}
-          {isOpen && (
-            <div className="md:hidden">
-              <div className="space-y-4 px-4 pb-4 pt-2">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex md:items-center md:space-x-6">
+            <NavigationMenu>
+              <NavigationMenuList>
                 {navigationItems.map((item) => (
-                  <div key={item.title} className="space-y-2">
-                    {item.items ? (
-                      <>
-                        <div className="font-medium">{item.title}</div>
-                        <div className="ml-4 space-y-2">
-                          {item.items.map((subItem) => (
-                            <Link
-                              key={subItem.title}
-                              to={subItem.href}
-                              className="block text-sm text-muted-foreground hover:text-foreground"
-                              onClick={() => setIsOpen(false)}
-                            >
-                              {subItem.title}
-                            </Link>
-                          ))}
-                        </div>
-                      </>
-                    ) : (
-                      <Link
-                        to={item.href}
-                        className="block font-medium hover:text-foreground"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {item.title}
-                      </Link>
-                    )}
-                  </div>
+                  <NavigationMenuItem key={item.title}>
+                    <Link
+                      to={item.href}
+                      className="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                    >
+                      {item.title}
+                    </Link>
+                  </NavigationMenuItem>
                 ))}
-                <div className="space-y-2 border-t pt-4">
-                  
+              </NavigationMenuList>
+            </NavigationMenu>
+
+            {/* Theme Switcher & Buttons */}
+            <div className="flex items-center space-x-4">
+              <ThemeSwitcher />
+              {isSignedIn ? (
+                <>
                   <Button
-                    className="w-full justify-start"
-                    onClick={() => {
-                      navigate("/blog/create");
-                      setIsOpen(false);
-                    }}
+                    className="dark:bg-white dark:text-black"
+                    onClick={() => navigate("/blog/create")}
                   >
-                     Write
-                     <PencilLine className="ml-2 h-4 w-4" />
+                    Write
+                    <PencilLine className="ml-2 h-4 w-4" />
                   </Button>
-                </div>
+                  {/* User Avatar Dropdown */}
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <Avatar>
+                        <AvatarImage src={pic} alt="User Avatar" />
+                        <AvatarFallback>{name?.charAt(0)}</AvatarFallback>
+                      </Avatar>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem onClick={() => navigate("/profile")}>
+                        Profile
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={handleLogout}>
+                        Logout
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </>
+              ) : (
+                <>
+                  <Button variant="outline" onClick={() => navigate("/auth/login")}>
+                    Login
+                  </Button>
+                  <Button onClick={() => navigate("/auth/register")}>
+                    Register
+                  </Button>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Mobile Navigation */}
+          <div className="md:hidden flex items-center space-x-4">
+            <ThemeSwitcher />
+            <button onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </nav>
+
+        {/* Mobile Dropdown Menu */}
+        {isOpen && (
+          <div className="md:hidden">
+            <div className="space-y-4 px-4 pb-4 pt-2">
+              {navigationItems.map((item) => (
+                <Link
+                  key={item.title}
+                  to={item.href}
+                  className="block font-medium hover:text-foreground"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.title}
+                </Link>
+              ))}
+
+              <div className="space-y-2 border-t pt-4">
+                {isSignedIn ? (
+                  <>
+                    <Button
+                      className="w-full justify-start"
+                      onClick={() => {
+                        navigate("/blog/create");
+                        setIsOpen(false);
+                      }}
+                    >
+                      Write
+                      <PencilLine className="ml-2 h-4 w-4" />
+                    </Button>
+                    {/* User Avatar Dropdown in Mobile */}
+                    <DropdownMenu >
+                      <DropdownMenuTrigger className="w-full text-left">
+                        <div className="flex items-center space-x-2 p-2 rounded-md hover:bg-accent">
+                          <Avatar className=" border border-white">
+                            <AvatarImage src={pic} alt="User Avatar" />
+                            <AvatarFallback>{name?.charAt(0)}</AvatarFallback>
+                          </Avatar>
+                          <span>{name}</span>
+                        </div>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem onClick={() => navigate("/profile")}>
+                          Profile
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={handleLogout}>
+                          Logout
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      variant="outline"
+                      className="w-full"
+                      onClick={() => {
+                        navigate("/auth/login");
+                        setIsOpen(false);
+                      }}
+                    >
+                      Login
+                    </Button>
+                    <Button
+                      className="w-full"
+                      onClick={() => {
+                        navigate("/auth/register");
+                        setIsOpen(false);
+                      }}
+                    >
+                      Register
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
-          )}
-        </div>
-      </header>
-    </div>
+          </div>
+        )}
+      </div>
+    </header>
   );
 }
 
