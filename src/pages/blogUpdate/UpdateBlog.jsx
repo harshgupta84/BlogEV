@@ -39,13 +39,13 @@ function UpdateBlog() {
       };
 
       await updateBlog(id, updatedBlog);
-
+      navigate("/blog/myblogs");
       toast({
         title: "Blog updated successfully!",
         description: `Your blog "${title}" has been updated.`,
       });
 
-      navigate("/blog/myblogs");
+      
     } catch (error) {
       toast({
         title: "Error",

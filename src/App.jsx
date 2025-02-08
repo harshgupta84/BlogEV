@@ -13,8 +13,10 @@ import Login from "./pages/auth/login/Login";
 import UserProfile from "./pages/auth/profile/UserProfile";
 import SuggestedBlog from "./pages/blogList/suggestedBlogs/SuggestedBlog";
 import BlogList from "./pages/blogList/suggestedBlogs/BlogList";
-
-
+import ChangePass from "./pages/auth/change-password/ChangePass";
+import ForgotPass from "./pages/auth/forgot-password/ForgotPass";
+import VerifyEmailForgot from "./pages/auth/forgot-password/VerifyEmailForgot";
+import ResetPass from "./pages/auth/reset-password/ResetPass";
 function App() {
   return (
     <div>
@@ -33,6 +35,10 @@ function App() {
             <Route path="/blog/update/:id" Component={UpdateBlog}></Route>
             <Route path="/blog/bookmarks" Component={Bookmarked}></Route>
             <Route path="/profile" Component={UserProfile}></Route>
+            <Route path="/auth/change-password" Component={ChangePass}></Route>
+            <Route path="/auth/forgot-password" Component={ForgotPass}></Route>
+            <Route path="/auth/verify-email-forgot" Component={VerifyEmailForgot}></Route>
+            <Route path="auth/reset-password" Component={ResetPass}></Route>
         </Routes>
       </BrowserRouter>
     </div>

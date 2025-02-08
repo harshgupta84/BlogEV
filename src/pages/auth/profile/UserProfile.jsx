@@ -14,6 +14,7 @@ import { Loader2 } from "lucide-react";
 function UserProfile() {
   const navigate = useNavigate();
   const { name, email, pic, interestedTopics, loading } = useUserStore();
+  console.log("User Profile", name, email, pic, interestedTopics, loading);
   const { logoutUser } = useLoginStore();
 
   const handleLogout = () => {
@@ -22,6 +23,7 @@ function UserProfile() {
   }
 
   const handleChangePassword = () => {
+    navigate('/auth/change-password');
     console.log("Change password clicked");
   }
 

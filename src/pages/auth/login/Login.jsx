@@ -130,6 +130,16 @@ function Login() {
             </button>
           </p>
         </form>
+        <p className="text-center mt-4 text-gray-600 dark:text-gray-400">
+            😭 {' '}
+            <button
+              type="button"
+              onClick={() => navigate('/auth/forgot-password')}
+              className="text-blue-500 hover:text-blue-600 font-medium"
+            >
+              Forgot Password
+            </button>
+          </p>
       </div>
     </div>
   );

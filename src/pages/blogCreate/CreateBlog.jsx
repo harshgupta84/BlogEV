@@ -11,15 +11,16 @@ function CreateBlog() {
   const navigate = useNavigate();
 
 
-  const handleSave = () => {
-    console.log(title,content,topics)
-    createBlog({title, content,topics});
+  const handleSave = async() => {
+    
+    await createBlog({title, content,topics});
+    navigate("/blog/myblogs");
     toast({
       title: `Blog "${title}" saved successfully!`,
       description: "Your blog has been saved to the system.",
     });
 
-    navigate("/blog/myblogs");
+   
   };
 
   return (

@@ -27,7 +27,7 @@ const useBlogStore = create((set) => ({
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response.data);
+      
       set({ myBlogs: response.data, loading: false });
     } catch (error) {
       set({ 
@@ -72,7 +72,7 @@ const useBlogStore = create((set) => ({
       const response = await axios.get(`http://localhost:3000/blog/view/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log(response.data);
+      
       set({ currentBlog: response.data, loading: false });
     } catch (error) {
       set({ error: "Blog not found", loading: false });
