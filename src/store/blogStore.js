@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { deleteBlog } from "@/services/blogService";
 
 const useBlogStore = create((set) => ({
   myBlogs: [],
@@ -96,6 +95,23 @@ const useBlogStore = create((set) => ({
     } catch (error) {
       set({ error: "Blog not found", loading: false });
       console.error("Error fetching blog by ID:", error);
+    }
+  },
+  createBlog: async (blogData) => {
+    set({ loading: true, error: null });
+
+    try {
+      const token = Cookies.get("token");
+      if (!token) throw new Error("No authentication token found");
+
+      const response = await axios.post("http://localhost:3000/blog/post", blogData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      set((state) => ({ myBlogs: [...state.myBlogs, response.data], loading: false }));
+    } catch (error) {
+      set({ error: "Failed to create blog", loading: false });
+      console.error("Error creating blog:", error);
     }
   },
 
