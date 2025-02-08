@@ -3,20 +3,19 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
- 
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CalendarIcon, PencilLine, Trash, Copy, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useBlogStore from "@/store/blogStore";
 import { BorderBeam } from "@/components/ui/border-beam";
-import axios from "axios";
 import { Button } from "@/components/ui/button";
-export default function BlogPostCard({ blog }) {
+
+export default function BlogPostCardUser({ blog }) {
   const { id, title, createdAt, topics = [], likes = [], views = 0, publish } = blog;
   const { toast } = useToast();
-  const { deleteBlog } = useBlogStore();
+  const { publishBlog } = useBlogStore();
 
   // Format the createdAt date
   const date = createdAt
@@ -65,12 +64,14 @@ export default function BlogPostCard({ blog }) {
   // Publish blog handler
   const publishBlogHandler = async () => {
     try {
-      await axios.post(`/blog/publish/${id}`);
+      await publishBlog(id);
+    await fetchMyBlogs();
       toast({
         title: "Blog Published!",
         description: "Your blog has been successfully published.",
         duration: 3000,
       });
+      
     } catch (error) {
       toast({
         title: "Error Publishing Blog",

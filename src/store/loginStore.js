@@ -35,7 +35,7 @@ const useLoginStore = create((set, get) => ({
 
       const { token, user } = response.data;
       Cookies.set('token', token, { expires: 7, secure: true, sameSite: 'Strict' });
-       console.log(user);
+       
       set({ token, error: null, loading: false });
       setUserInfo(user);
     } catch (error) {
