@@ -6,23 +6,25 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { CalendarIcon, PencilLine, Trash, Copy } from "lucide-react";
+import { CalendarIcon, PencilLine, Trash, Copy, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 import useBlogStore from "@/store/blogStore";
 import { BorderBeam } from "@/components/ui/border-beam";
 
 export default function BlogPostCard({ blog }) {
-  const { id, title, createdAt, author, category, pic, likes } = blog;
+  const { id, title, createdAt, topics = [], likes = [], views = 0, user } = blog;
   const { toast } = useToast();
   const { deleteBlog } = useBlogStore();
 
   // Format the createdAt date
-  const date = new Date(createdAt).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const date = createdAt
+    ? new Date(createdAt).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : "Unknown Date";
 
   // Delete handler with toast notification
   const deleteHandler = () => {
@@ -36,7 +38,7 @@ export default function BlogPostCard({ blog }) {
 
   // Copy link handler
   const copyLinkHandler = () => {
-    const baseURL = window.location.origin; 
+    const baseURL = window.location.origin;
     const link = `${baseURL}/blog/view/${id}`;
 
     navigator.clipboard
@@ -63,34 +65,25 @@ export default function BlogPostCard({ blog }) {
     <div className="relative">
       <BorderBeam className="rounded-2xl" size={100} duration={9} delay={8} />
       <Card className="shadow-md border dark:border-gray-700">
-        {/* Header Section with Author Info and Edit/Delete/Copy Icons */}
-        <div className="flex items-center justify-between px-4 pt-4 sm:flex-col sm:items-start sm:gap-4 md:flex-row">
-          <div className="flex items-center space-x-2 text-[#8CCC4C]">
-            <Avatar className="h-8 w-8 border dark:border-white">
-              <AvatarImage src={pic} alt={author} />
-              <AvatarFallback>
-                {author.slice(0, 2).toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-            <span className="text-sm font-medium">{author}</span>
-          </div>
-          <div className="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex gap-7 sm:mt-2 md:mt-0">
-            <div>
-              <Link to={`/blog/update/${id}`}>
-                <PencilLine className="cursor-pointer" />
-              </Link>
-            </div>
-            <div>
-              <Trash className="cursor-pointer" onClick={deleteHandler} />
-            </div>
-            <div>
-              <Copy
-                className="cursor-pointer"
-                onClick={copyLinkHandler} 
-              />
-            </div>
-          </div>
+        {/* Header Section with Edit/Delete/Copy Icons */}
+        <div className="flex items-center justify-end px-4 pt-4 gap-7">
+          <Link to={`/blog/update/${id}`}>
+            <PencilLine className="cursor-pointer" />
+          </Link>
+          <Trash className="cursor-pointer" onClick={deleteHandler} />
+          <Copy className="cursor-pointer" onClick={copyLinkHandler} />
         </div>
+
+        {/* User Avatar and Name Section */}
+        <CardContent className="flex items-center gap-4 pb-4">
+          <Avatar>
+            <AvatarImage src={user?.image || "https://via.placeholder.com/150"} alt={user?.name} />
+            <AvatarFallback>{user?.name?.charAt(0) || "U"}</AvatarFallback>
+          </Avatar>
+          <div className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            {user?.name || "Unknown Author"}
+          </div>
+        </CardContent>
 
         {/* Blog Title Section */}
         <Link to={`/blog/view/${id}`}>
@@ -109,11 +102,22 @@ export default function BlogPostCard({ blog }) {
           </div>
         </CardContent>
 
-        {/* Blog Footer Section with Category and Likes */}
+        {/* Blog Footer Section with Categories, Views, and Likes */}
         <CardFooter className="flex items-center justify-between pt-4 sm:flex-col sm:items-start md:flex-row">
-          <Badge className="dark:bg-[#0098C5] text-sm mb-2 md:mb-0">{category}</Badge>
-          <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-300 hover:scale-110 transition-transform">
-            👍 <span>{likes}</span>
+          <div className="flex flex-wrap gap-2">
+            {topics.map((topic, index) => (
+              <Badge key={index} className="dark:bg-[#0098C5] text-sm">
+                {topic}
+              </Badge>
+            ))}
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-300 hover:scale-110 transition-transform">
+              <Eye className="h-5 w-5" /> <span>{views}</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-300 hover:scale-110 transition-transform">
+              👍 <span>{likes.length}</span>
+            </div>
           </div>
         </CardFooter>
       </Card>

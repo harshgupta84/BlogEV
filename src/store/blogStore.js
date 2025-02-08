@@ -1,60 +1,40 @@
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
-import {
-  addBlog,
-  deleteBlog,
-  updateBlog,
-  getBlogById,
-  listBlogs,
-} from "@/services/blogService";
+import axios from "axios";
+import Cookies from "js-cookie";
 
-const useBlogStore = create(
-  persist(
-    (set) => ({
-      // Initialize the blogs state from the service
-      blogs: listBlogs(),
+const useBlogStore = create((set) => ({
+  myBlogs: [],
+  suggestedBlogs: [],
+  loading: false,
+  error: null,
 
-      // Add a blog
-      addBlog: (title, content, author, category, pic) => {
-        const newBlog = addBlog(title, content, author, category, pic);
-        set((state) => ({
-          blogs: [...state.blogs, newBlog],
-        }));
-      },
+  setError: (error) => set({ error }),
+  setLoading: (loading) => set({ loading }),
+  setMyBlogs: (blogs) => set({ myBlogs: blogs }),
+  setSuggestedBlogs: (blogs) => set({ suggestedBlogs: blogs }),
 
-      // Delete a blog
-      deleteBlog: (id) => {
-        deleteBlog(id);
-        set((state) => ({
-          blogs: state.blogs.filter((blog) => String(blog.id) !== String(id)),
-        }));
-      },
+  fetchMyBlogs: async () => {
+    set({ loading: true, error: null });
 
-      // Update a blog
-      updateBlog: (id, updatedData) => {
-        const updatedBlog = updateBlog(id, updatedData);
-        set((state) => ({
-          blogs: state.blogs.map((blog) =>
-            String(blog.id) === String(id) ? updatedBlog : blog
-          ),
-        }));
-      },
+    try {
+      const token = Cookies.get("token");
+      if (!token) {
+        throw new Error("No authentication token found");
+      }
 
-      // Get a blog by ID
-      getBlogById: (id) => {
-        return getBlogById(id);
-      },
-
-      // List all blogs
-      listBlogs: () => {
-        return listBlogs();
-      },
-    }),
-    {
-      name: "blogs-storage", // Use localStorage for persistence
-      storage: createJSONStorage(() => localStorage),
+      const response = await axios.get("http://localhost:3000/blog/myblogs", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response.data);
+      set({ myBlogs: response.data, loading: false });
+    } catch (error) {
+      const errorMessage = error.response?.data?.message || "Failed to fetch user blogs.";
+      set({ error: errorMessage, loading: false });
+      console.error("Error fetching blogs:", errorMessage);
     }
-  )
-);
+  },
+}));
 
 export default useBlogStore;

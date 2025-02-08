@@ -31,7 +31,7 @@ function Header() {
 
   const navigationItems = isSignedIn
     ? [
-        { title: "My Blogs", href: "/myblogs" },
+        { title: "My Blogs", href: "/blog/myblogs" },
         { title: "Bookmarks", href: "/blog/bookmarks" },
       ]
     : [];
@@ -85,10 +85,12 @@ function Header() {
                   {/* User Avatar Dropdown */}
                   <DropdownMenu>
                     <DropdownMenuTrigger>
-                      <Avatar>
-                        <AvatarImage src={pic} alt="User Avatar" />
-                        <AvatarFallback>{name?.charAt(0)}</AvatarFallback>
-                      </Avatar>
+                       <Avatar className="border border-gray-300 dark:border-white">
+                                        {pic && <AvatarImage src={pic} alt={name} />}
+                                        <AvatarFallback className="text-gray-700 dark:text-gray-300">
+                                          {name?.charAt(0)?.toUpperCase()}
+                                        </AvatarFallback>
+                                      </Avatar>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem onClick={() => navigate("/profile")}>
@@ -151,13 +153,15 @@ function Header() {
                       <PencilLine className="ml-2 h-4 w-4" />
                     </Button>
                     {/* User Avatar Dropdown in Mobile */}
-                    <DropdownMenu >
+                    <DropdownMenu>
                       <DropdownMenuTrigger className="w-full text-left">
                         <div className="flex items-center space-x-2 p-2 rounded-md hover:bg-accent">
-                          <Avatar className=" border border-white">
-                            <AvatarImage src={pic} alt="User Avatar" />
-                            <AvatarFallback>{name?.charAt(0)}</AvatarFallback>
-                          </Avatar>
+                           <Avatar className="border border-gray-300 dark:border-white">
+                                            {pic && <AvatarImage src={pic} alt={name} />}
+                                            <AvatarFallback className="text-gray-700 dark:text-gray-300">
+                                              {name?.charAt(0)?.toUpperCase()}
+                                            </AvatarFallback>
+                                          </Avatar>
                           <span>{name}</span>
                         </div>
                       </DropdownMenuTrigger>
@@ -165,9 +169,7 @@ function Header() {
                         <DropdownMenuItem onClick={() => navigate("/profile")}>
                           Profile
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={handleLogout}>
-                          Logout
-                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </>

@@ -9,7 +9,8 @@ const useLoginStore = create((set, get) => ({
   token: Cookies.get('token') || null,
   error: null,
   loading: false,
-
+  setError: (error) => set({ error }),
+  setLoading: (loading) => set({ loading }),
   setEmail: (email) => set({ email }),
   setPassword: (password) => set({ password }),
 
@@ -34,7 +35,7 @@ const useLoginStore = create((set, get) => ({
 
       const { token, user } = response.data;
       Cookies.set('token', token, { expires: 7, secure: true, sameSite: 'Strict' });
-
+       console.log(user);
       set({ token, error: null, loading: false });
       setUserInfo(user);
     } catch (error) {

@@ -25,7 +25,7 @@ function Login() {
   // Redirect if already signed in
   useEffect(() => {
     if (isSignedIn) {
-      navigate('/myblogs');
+      navigate('/blog/feed');
     }
   }, [isSignedIn, navigate]);
 

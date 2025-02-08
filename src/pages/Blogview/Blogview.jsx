@@ -30,7 +30,7 @@ export default function BlogView() {
 
   const deleteHandler = () => {
     deleteBlog(id);
-    navigate("/myblogs");
+    navigate("/blog/myblogs");
     toast({
       title: "Blog deleted successfully!",
       description: `Your blog "${blog.title}" has been deleted.`,
