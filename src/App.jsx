@@ -7,7 +7,8 @@ import CreateBlog from "./pages/blogCreate/CreateBlog";
 import UpdateBlog from "./pages/blogUpdate/UpdateBlog";
 import Header from "./pages/components/Header";
 import Bookmarked from "./pages/bookmarks/Bookmarked";
-
+import Register from "./pages/auth/register/Register";
+import Login from "./pages/auth/login/Login";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
             <Route path="/blog/view/:id" Component={Blog}></Route>
             <Route path="/blog/update/:id" Component={UpdateBlog}></Route>
             <Route path="/blog/bookmarks" Component={Bookmarked}></Route>
+            <Route path="/auth/register" Component={Register}></Route>
+            <Route path="auth/login" Component={Login}></Route>
         </Routes>
       </BrowserRouter>
     </div>
