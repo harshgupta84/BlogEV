@@ -41,12 +41,6 @@ function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
   if(loading){
     return (
       <div className="flex flex-col items-center  mx-8">
-        <h1 className="text-5xl font-extrabold tracking-tight bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] bg-clip-text text-transparent">
-            Markdown Editor
-          </h1>
-          <p className="text-lg text-muted-foreground mt-4">
-            Create and preview your Markdown.
-          </p>
        
       <div className="flex gap-4 w-full">
         <div className="flex-1 bg-neutral-200 dark:bg-neutral-700 rounded-md h-96 animate-pulse"></div>
@@ -64,14 +58,7 @@ function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
     <div className="flex flex-col min-h-screen bg-background relative mb-4 mx-3">
     
       <div className="container mx-auto max-w-[1200px] flex-1 flex flex-col items-center justify-center z-10 relative">
-        <div className="text-center mb-8">
-          <h1 className="text-5xl font-extrabold tracking-tight bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] bg-clip-text text-transparent">
-            Markdown Editor
-          </h1>
-          <p className="text-lg text-muted-foreground mt-4">
-            Create and preview your Markdown.
-          </p>
-        </div>
+        
 
         <div className="m-3">
           <PulsatingButton onClick={generateContent}>

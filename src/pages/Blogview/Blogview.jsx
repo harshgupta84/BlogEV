@@ -1,29 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { getBlogById } from "@/services/blogService";
 import MarkdownPreview from "@uiw/react-markdown-preview";
-import "highlight.js/styles/github.css"; // Syntax highlighting styles
-import useBlogStore from "@/store/blogStore";
-import useBookmarkStore from "@/store/bookmarkStore";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge"; // Add this import
 import { useToast } from "@/hooks/use-toast";
-import { Edit3, Trash2, Share2, Bookmark, BookmarkPlus } from "lucide-react"; // Lucide icons
+import { Edit3, Trash2, Share2, Bookmark, BookmarkPlus, Calendar, Eye } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
+import useBookmarkStore from "@/store/bookmarkStore";
+import useBlogStore from "@/store/blogStore";
 
 export default function BlogView() {
-  const { id } = useParams(); // Extract ID from the URL
-  const { getBlogById, deleteBlog } = useBlogStore();
-  const { addBookmark, removeBookmark, isBookmarked } = useBookmarkStore();
+  const { id } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { deleteBlog } = useBlogStore();
+  const { addBookmark, removeBookmark, isBookmarked } = useBookmarkStore();
 
-  const blog = getBlogById(id);
+  const [blog, setBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlog = async () => {
+      setLoading(true);
+      const blogData = await getBlogById(id);
+      setBlog(blogData);
+      setLoading(false);
+    };
+
+    fetchBlog();
+  }, [id]);
+
+  if (loading) {
+    return <p className="text-center text-lg">Loading...</p>;
+  }
 
   if (!blog) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <p className="text-center text-xl text-red-500 font-semibold">
-          Blog not found!
-        </p>
+        <p className="text-center text-xl text-red-500 font-semibold">Blog not found!</p>
       </div>
     );
   }
@@ -62,82 +77,82 @@ export default function BlogView() {
     }
   };
 
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  const formatViews = (views) => {
+    if (views >= 1000000) {
+      return `${(views / 1000000).toFixed(1)}M`;
+    } else if (views >= 1000) {
+      return `${(views / 1000).toFixed(1)}K`;
+    }
+    return views;
+  };
   return (
     <div className="container mx-auto px-4 py-8">
-      {/* Command Panel */}
-      <div
-        className="flex flex-col sm:flex-row justify-center items-center sm:items-stretch sm:space-x-4 space-y-4 sm:space-y-0 mb-6 p-4  mx-4 sm:mx-8 lg:mx-16"
-      >
-        {/* Update Note Button */}
-        <Button
-          className="flex items-center space-x-2 text-lg sm:text-xl bg-gray-200 dark:bg-neutral-700 hover:bg-gray-300 dark:hover:bg-neutral-600 transition-colors"
-        >
-          <Edit3 size={18} />
-          <Link to={`/blog/update/${id}`}>Update Note</Link>
-        </Button>
+    {/* Command Panel - Keep as is */}
+    
+    {/* Blog Content */}
+    <div className="bg-white dark:bg-neutral-900 shadow-lg rounded-lg p-6 max-w-3xl mx-4 sm:mx-auto">
+      {/* Blog Title */}
+      <div className="text-center mb-8">
+        <h1 className="text-5xl font-extrabold tracking-tight bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] bg-clip-text text-transparent">
+          {blog.title}
+        </h1>
+      </div>
 
-        {/* Delete Note Button */}
-        <Button
-          className="flex items-center space-x-2 text-lg sm:text-xl bg-red-500 dark:bg-red-700 hover:bg-red-600 dark:hover:bg-red-600 text-white transition-colors"
-          onClick={deleteHandler}
-        >
-          <Trash2 size={18} />
-          <span>Delete Note</span>
-        </Button>
+      {/* Metadata */}
+      <div className="flex flex-col sm:flex-row items-center justify-between mb-6 space-y-4 sm:space-y-0">
+        {/* Author and Date */}
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2">
+            <span className="font-semibold text-gray-700 dark:text-gray-300">
+              {blog.authorId}
+            </span>
+          </div>
+          <div className="flex items-center space-x-2 text-gray-500 dark:text-gray-400">
+            <Calendar size={16} />
+            <span>{formatDate(blog.createdAt)}</span>
+          </div>
+        </div>
 
-      
-        <Button
-          className="flex items-center space-x-2 text-lg sm:text-xl bg-blue-500 dark:bg-blue-700 hover:bg-blue-600 dark:hover:bg-blue-600 text-white transition-colors"
-          onClick={shareHandler}
-        >
-          <Share2 size={18} />
-          <span>Share Link</span>
-        </Button>
-        <Button
-          className={`flex items-center space-x-2 text-lg sm:text-xl ${
-            isBookmarked(id)
-              ? "bg-yellow-500 dark:bg-yellow-700 hover:bg-yellow-600 dark:hover:bg-yellow-600 text-white"
-              : "bg-gray-200 dark:bg-neutral-700 hover:bg-gray-300 dark:hover:bg-neutral-600"
-          } transition-colors`}
-          onClick={toggleBookmark}
-        >
-          {isBookmarked(id) ? <Bookmark size={18} /> : <BookmarkPlus size={18} />}
-          <span>{isBookmarked(id) ? "Remove Bookmark" : "Add Bookmark"}</span>
-        </Button>
+        {/* Views */}
+        <div className="flex items-center space-x-2 text-gray-500 dark:text-gray-400">
+          <Eye size={16} />
+          <span>{formatViews(blog.views)} views</span>
+        </div>
+      </div>
+
+      {/* Topics */}
+      <div className="flex flex-wrap gap-2 mb-6">
+        {(Array.isArray(blog.topics) ? blog.topics : JSON.parse(blog.topics)).map((topic, index) => (
+          <Badge 
+            key={index}
+            variant="secondary"
+            className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-full"
+          >
+            {topic}
+          </Badge>
+        ))}
       </div>
 
       {/* Blog Content */}
-      <div className="bg-white dark:bg-neutral-900 shadow-lg rounded-lg p-6 max-w-3xl mx-4 sm:mx-auto">
-        {/* Blog Title */}
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 text-left">
-          {blog.title}
-        </h1>
-
-        {/* Metadata */}
-        <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base mb-6 text-left">
-          By <span className="font-semibold">{blog.author}</span> |{" "}
-          {new Date(blog.createdAt).toLocaleDateString()} |{" "}
-          <span className="italic">{blog.category}</span>
-        </p>
-
-        {/* Blog Image */}
-        {blog.pic && (
-          <img
-            src={blog.pic}
-            alt={`Image for blog "${blog.title}"`}
-            className="rounded-md mb-6 w-full max-h-80 object-cover"
-          />
-        )}
-
-        {/* Blog Content */}
-        <div className="prose dark:prose-invert max-w-none leading-relaxed">
-          <MarkdownPreview
-            source={blog.content}
-            style={{ background: "transparent", color: "inherit" }}
-          />
-        </div>
+      <div className="prose dark:prose-invert max-w-none leading-relaxed">
+        <MarkdownPreview 
+          source={blog.content} 
+          style={{ 
+            background: "transparent",
+            color: "inherit"
+          }}
+        />
       </div>
-      <Toaster />
     </div>
-  );
+    <Toaster />
+  </div>
+    );
 }

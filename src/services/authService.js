@@ -10,7 +10,7 @@ const login = async (email, password) => {
       });
   
       if (!response.ok) throw new Error('Invalid login credentials');
-      return response.json(); // { user: { id, email, name, pic }, token }
+      return response.json(); 
     } catch (error) {
       throw new Error(error.message || 'Login failed');
     }
