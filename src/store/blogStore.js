@@ -12,8 +12,8 @@ const useBlogStore = create(
   persist(
     (set) => ({
       // Initialize the blogs state from the service
-      blogs: listBlogs(),
-
+      myblogs: listBlogs(),
+      
       // Add a blog
       addBlog: (title, content, author, category, pic) => {
         const newBlog = addBlog(title, content, author, category, pic);

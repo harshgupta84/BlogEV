@@ -4,6 +4,8 @@ import { Input } from '@/components/ui/input';
 import { useNavigate } from 'react-router-dom';
 import DotPattern from '@/components/ui/dot-pattern';
 import { cn } from '@/lib/utils';
+import authService from '@/services/authService';
+import useUserStore from '@/store/userStore';
 
 function Login() {
   const navigate = useNavigate();
@@ -11,13 +13,12 @@ function Login() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  
+  const initializeState = useUserStore((state) => state.initializeState);
 
   useEffect(() => {
-    if (isSignedIn) {
-      navigate('/blog/feed');
-    }
-  }, [isSignedIn, navigate]);
+    initializeState();  // Initialize state on component load
+  }, [initializeState]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,13 +26,12 @@ function Login() {
     setError(null);
 
     try {
-      // Simulate API call for login
-      setTimeout(() => {
-        setIsSignedIn(true);
-        setLoading(false);
-      }, 1000);
+      const data = await authService.login(email, password);
+      useUserStore.getState().setUserInfo(data.user, data.token);  // Store user data and token
+      navigate('/myblogs');
     } catch (error) {
       setError('Login failed. Please try again.');
+    } finally {
       setLoading(false);
     }
   };

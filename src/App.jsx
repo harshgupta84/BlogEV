@@ -9,22 +9,52 @@ import Header from "./pages/components/Header";
 import Bookmarked from "./pages/bookmarks/Bookmarked";
 import Register from "./pages/auth/register/Register";
 import Login from "./pages/auth/login/Login";
+import ProtectedRoute from '@/components/routes/ProtectedRoute';
+import useUserStore from '@/store/userStore';
+import { useEffect } from "react";
 
 function App() {
+
+  const initializeState = useUserStore((state) => state.initializeState);
+
+  useEffect(() => {
+    initializeState(); // Initialize state from local storage
+  }, [initializeState]);
+
   return (
     <div>
-    
       <BrowserRouter>
-      <Header/>
+        <Header />
         <Routes>
-            <Route path="/" Component={LandingPage}></Route>
-            <Route path="/myblogs" Component={MyBlogs}></Route>
-            <Route path="/blog/create" Component={CreateBlog}></Route>
-            <Route path="/blog/view/:id" Component={Blog}></Route>
-            <Route path="/blog/update/:id" Component={UpdateBlog}></Route>
-            <Route path="/blog/bookmarks" Component={Bookmarked}></Route>
-            <Route path="/auth/register" Component={Register}></Route>
-            <Route path="auth/login" Component={Login}></Route>
+          <Route path="/" Component={LandingPage} />
+          <Route
+            path="/myblogs"
+            element={
+              <ProtectedRoute>
+                <MyBlogs />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/blog/create"
+            element={
+              <ProtectedRoute>
+                <CreateBlog />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/blog/view/:id" Component={Blog} />
+          <Route
+            path="/blog/update/:id"
+            element={
+              <ProtectedRoute>
+                <UpdateBlog />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/blog/bookmarks" Component={Bookmarked} />
+          <Route path="/auth/register" Component={Register} />
+          <Route path="auth/login" Component={Login} />
         </Routes>
       </BrowserRouter>
     </div>
@@ -32,3 +62,5 @@ function App() {
 }
 
 export default App;
+
+ 

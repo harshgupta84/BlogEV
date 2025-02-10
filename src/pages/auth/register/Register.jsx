@@ -5,6 +5,10 @@ import { Input } from '@/components/ui/input';
 import DotPattern from '@/components/ui/dot-pattern';
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
+import authService from '@/services/authService';
+
+
+
 function Register() {
   const navigate = useNavigate();
 
@@ -22,8 +26,18 @@ function Register() {
       setError('Passwords do not match');
       return;
     }
-
-    // Implement registration logic here
+  
+    setLoading(true);
+    setError(null);
+  
+    try {
+      const data = await authService.register(name, email, password);
+      navigate('/auth/login');
+    } catch (error) {
+      setError('Registration failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {
