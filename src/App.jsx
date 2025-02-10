@@ -16,12 +16,7 @@ import { useEffect } from "react";
 
 function App() {
 
-  const initializeState = useUserStore((state) => state.initializeState);
-
-  useEffect(() => {
-    initializeState(); // Initialize state from local storage
-  }, [initializeState]);
-
+ 
   return (
     <div>
       <BrowserRouter>

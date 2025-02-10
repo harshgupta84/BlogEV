@@ -11,15 +11,10 @@ function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   
-  const initializeState = useUserStore((state) => state.initializeState);
-
-  useEffect(() => {
-    initializeState();  // Initialize state on component load
-  }, [initializeState]);
-
+  const {loading,setLoading,setIsSignedIn,setToken}=useUserStore();
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -27,7 +22,8 @@ function Login() {
 
     try {
       const data = await authService.login(email, password);
-      useUserStore.getState().setUserInfo(data.user, data.token);  // Store user data and token
+      setToken(data.access_token); // Store token
+      setIsSignedIn(true);  // Store user data and token
       navigate('/blog/myfeed');
     } catch (error) {
       setError('Login failed. Please try again.');
