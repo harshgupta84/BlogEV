@@ -6,7 +6,7 @@ import useBlogStore from "@/store/blogStore";
 
 function MyBlogs() {
   const { getUserBlogs, myblogs } = useBlogStore();
-console.log(myblogs);
+  console.log("MereBlogs",myblogs);
   useEffect(() => {
     getUserBlogs();
   }, [getUserBlogs]); // Added dependency
@@ -26,6 +26,7 @@ console.log(myblogs);
       <div className="mt-5">
        
         <ToastProvider>
+          <BlogPosts blogs={myblogs} />
           <Toaster />
         </ToastProvider>
       </div>

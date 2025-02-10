@@ -13,7 +13,7 @@ import useBlogStore from "@/store/blogStore";
 import { BorderBeam } from "@/components/ui/border-beam";
 
 export default function BlogPostCard({ blog }) {
-  const { id, title, createdAt, author, category, pic, likes } = blog;
+  const { id, title, createdAt, content, topics } = blog;
   const { toast } = useToast();
   const { deleteBlog } = useBlogStore();
 
@@ -29,7 +29,7 @@ export default function BlogPostCard({ blog }) {
     deleteBlog(id);
     toast({
       title: `Blog "${title}" deleted successfully!`,
-      description: "The blog post has been removed from the system.",
+      description: "The blog post has been removed.",
       duration: 4000,
     });
   };
@@ -48,8 +48,7 @@ export default function BlogPostCard({ blog }) {
           duration: 3000,
         });
       })
-      .catch((error) => {
-        console.error("Failed to copy link:", error);
+      .catch(() => {
         toast({
           title: "Error copying link",
           description: "Something went wrong. Please try again.",
@@ -63,32 +62,21 @@ export default function BlogPostCard({ blog }) {
     <div className="relative">
       <BorderBeam className="rounded-2xl" size={100} duration={9} delay={8} />
       <Card className="shadow-md border dark:border-gray-700">
-        {/* Header Section with Author Info and Edit/Delete/Copy Icons */}
+        {/* Header Section */}
         <div className="flex items-center justify-between px-4 pt-4 sm:flex-col sm:items-start sm:gap-4 md:flex-row">
           <div className="flex items-center space-x-2 text-[#8CCC4C]">
             <Avatar className="h-8 w-8 border dark:border-white">
-              <AvatarImage src={pic} alt={author} />
-              <AvatarFallback>
-                {author.slice(0, 2).toUpperCase()}
-              </AvatarFallback>
+              <AvatarImage src="/default-avatar.png" alt="Author" />
+              <AvatarFallback>AB</AvatarFallback>
             </Avatar>
-            <span className="text-sm font-medium">{author}</span>
+            <span className="text-sm font-medium">Unknown Author</span>
           </div>
           <div className="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex gap-7 sm:mt-2 md:mt-0">
-            <div>
-              <Link to={`/blog/update/${id}`}>
-                <PencilLine className="cursor-pointer" />
-              </Link>
-            </div>
-            <div>
-              <Trash className="cursor-pointer" onClick={deleteHandler} />
-            </div>
-            <div>
-              <Copy
-                className="cursor-pointer"
-                onClick={copyLinkHandler} 
-              />
-            </div>
+            <Link to={`/blog/update/${id}`}>
+              <PencilLine className="cursor-pointer" />
+            </Link>
+            <Trash className="cursor-pointer" onClick={deleteHandler} />
+            <Copy className="cursor-pointer" onClick={copyLinkHandler} />
           </div>
         </div>
 
@@ -101,19 +89,21 @@ export default function BlogPostCard({ blog }) {
           </CardHeader>
         </Link>
 
-        {/* Blog Date Section */}
-        <CardContent className="pb-2">
+        {/* Blog Content Preview */}
+        
+
+        {/* Blog Date and Topics */}
+        <CardFooter className="flex items-center justify-between pt-4 sm:flex-col sm:items-start md:flex-row">
           <div className="flex items-center space-x-2 text-md text-muted-foreground">
             <CalendarIcon className="h-6 w-6" />
             <time dateTime={createdAt}>{date}</time>
           </div>
-        </CardContent>
-
-        {/* Blog Footer Section with Category and Likes */}
-        <CardFooter className="flex items-center justify-between pt-4 sm:flex-col sm:items-start md:flex-row">
-          <Badge className="dark:bg-[#0098C5] text-sm mb-2 md:mb-0">{category}</Badge>
-          <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-300 hover:scale-110 transition-transform">
-            👍 <span>{likes}</span>
+          <div className="flex gap-2">
+            {JSON.parse(topics || "[]").map((topic, index) => (
+              <Badge key={index} className="dark:bg-[#0098C5] text-sm">
+                {topic}
+              </Badge>
+            ))}
           </div>
         </CardFooter>
       </Card>
