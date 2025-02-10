@@ -21,7 +21,7 @@ function CreateBlog() {
       description: "Your blog has been saved to the system.",
     });
 
-    navigate("/myblogs");
+    navigate("/blog/myblogs");
   };
 
   return (

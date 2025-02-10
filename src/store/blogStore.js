@@ -13,7 +13,7 @@ const useBlogStore = create(
     (set) => ({
       // Initialize the blogs state from the service
       myblogs: listBlogs(),
-      
+      myfeed:[],
       // Add a blog
       addBlog: (title, content, author, category, pic) => {
         const newBlog = addBlog(title, content, author, category, pic);

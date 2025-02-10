@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { BorderBeam } from "@/components/ui/border-beam";
 import useBlogStore from "@/store/blogStore";
 
-export default function BlogPosts() {
-  const { blogs } = useBlogStore();
+export default function BlogPosts({blogs}) {
+  console.log(blogs);
   return (
     <div>
       <DotPattern

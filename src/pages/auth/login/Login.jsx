@@ -28,7 +28,7 @@ function Login() {
     try {
       const data = await authService.login(email, password);
       useUserStore.getState().setUserInfo(data.user, data.token);  // Store user data and token
-      navigate('/myblogs');
+      navigate('/blog/myfeed');
     } catch (error) {
       setError('Login failed. Please try again.');
     } finally {

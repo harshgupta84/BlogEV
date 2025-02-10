@@ -1,7 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/landingPage/LandingPage";
-import MyBlogs from "./pages/blogList/MyBlogs";
+import MyBlogs from "./pages/blogList/myblogs/MyBlogs";
+import MyFeed from "./pages/blogList/myfeed/MyFeed";
 import Blog from "./pages/blogView/Blog";
 import CreateBlog from "./pages/blogCreate/CreateBlog";
 import UpdateBlog from "./pages/blogUpdate/UpdateBlog";
@@ -28,10 +29,18 @@ function App() {
         <Routes>
           <Route path="/" Component={LandingPage} />
           <Route
-            path="/myblogs"
+            path="/blog/myblogs"
             element={
               <ProtectedRoute>
                 <MyBlogs />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/blog/myfeed"
+            element={
+              <ProtectedRoute>
+                <MyFeed />
               </ProtectedRoute>
             }
           />

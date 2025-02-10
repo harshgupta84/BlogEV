@@ -43,7 +43,7 @@ function UpdateBlog() {
       description: `Your blog "${title}" has been updated.`,
     });
 
-    navigate("/myblogs");
+    navigate("/blog/myblogs");
   };
 
   if (!existingBlog) {
