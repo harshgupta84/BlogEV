@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 import blogsData from "../data/blogs.json"; // Import the JSON file
 
-let blogs = blogsData.blogs || [];
-
+let blogs =  [];
+const API_URL = 'http://localhost:3000/blog'; 
 
 export const addBlog = (title, content, author, category, pic) => {
   const newBlog = {
@@ -26,7 +26,32 @@ export const getBlogById = (id) => {
 };
 
 
-export const listBlogs = () => {
+export const listBlogs = async() => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    console.error("No token found. User not authenticated.");
+    return null;
+  }
+
+  try {
+    const response = await fetch("http://localhost:3000/blog/myblogs", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch user blogs");
+    }
+
+    const data = await response.json();
+    return data// Assuming the response contains an array of blogs
+  } catch (error) {
+    console.error("Error fetching user blogs:", error);
+    return null;
+  }
   return blogs;
 };
 

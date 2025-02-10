@@ -11,30 +11,36 @@ import {
 const useBlogStore = create(
   persist(
     (set) => ({
-      // Initialize the blogs state from the service
-      myblogs: listBlogs(),
-      myfeed:[],
-      // Add a blog
-      addBlog: (title, content, author, category, pic) => {
-        const newBlog = addBlog(title, content, author, category, pic);
+      myblogs: [],  // User-specific blogs
+      myfeed: [],   // General blog feed
+
+      // Add a new blog
+      addBlog: async (title, content, author, category, pic) => {
+        const newBlog = await addBlog(title, content, author, category, pic);
         set((state) => ({
-          blogs: [...state.blogs, newBlog],
+          myblogs: [...state.myblogs, newBlog], // Update user blogs
         }));
       },
 
+      // Fetch blogs created by the logged-in user
+      getUserBlogs: async () => {
+        const userBlogs = await listBlogs();
+        set({ myblogs: userBlogs });
+      },
+
       // Delete a blog
-      deleteBlog: (id) => {
-        deleteBlog(id);
+      deleteBlog: async (id) => {
+        await deleteBlog(id);
         set((state) => ({
-          blogs: state.blogs.filter((blog) => String(blog.id) !== String(id)),
+          myblogs: state.myblogs.filter((blog) => String(blog.id) !== String(id)),
         }));
       },
 
       // Update a blog
-      updateBlog: (id, updatedData) => {
-        const updatedBlog = updateBlog(id, updatedData);
+      updateBlog: async (id, updatedData) => {
+        const updatedBlog = await updateBlog(id, updatedData);
         set((state) => ({
-          blogs: state.blogs.map((blog) =>
+          myblogs: state.myblogs.map((blog) =>
             String(blog.id) === String(id) ? updatedBlog : blog
           ),
         }));
@@ -45,13 +51,14 @@ const useBlogStore = create(
         return getBlogById(id);
       },
 
-      // List all blogs
-      listBlogs: () => {
-        return listBlogs();
+      // List all blogs for feed
+      listBlogs: async () => {
+        const blogs = await listBlogs();
+        set({ myfeed: blogs });
       },
     }),
     {
-      name: "blogs-storage", // Use localStorage for persistence
+      name: "blogs-storage",
       storage: createJSONStorage(() => localStorage),
     }
   )
