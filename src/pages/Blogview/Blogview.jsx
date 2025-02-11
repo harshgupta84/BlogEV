@@ -16,12 +16,14 @@ import {
 } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
 import useBookmarkStore from "@/store/bookmarkStore";
-import useBlogStore from "@/store/blogStore";
 import DotPattern from "@/components/ui/dot-pattern";
 import { cn } from "@/lib/utils";
 import useUserStore from "@/store/userStore";
+
+
 export default function BlogView() {
   const { id } = useParams();
+ 
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user } = useUserStore();
@@ -29,12 +31,12 @@ export default function BlogView() {
 
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
-
+ 
   useEffect(() => {
     const fetchBlog = async () => {
       setLoading(true);
       const blogData = await getBlogById(id);
-      console.log(blogData);
+      
       setBlog(blogData);
       setLoading(false);
     };

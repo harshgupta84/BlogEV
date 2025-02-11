@@ -17,7 +17,7 @@ const useBlogStore = create(
 
       // Add a new blog
       addBlog: async (title, content, category) => {
-        console.log(title, content, category);
+        
         try {
           const newBlog = await addBlog(title, content, category);
           if (newBlog) {
