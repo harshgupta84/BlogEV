@@ -13,11 +13,24 @@ import { ChevronsUpDown, Check } from "lucide-react";
 import DotPattern from "@/components/ui/dot-pattern";
 import { cn } from "@/lib/utils";
 const topicsList = [
-  { value: "tech", label: "Technology" },
-  { value: "health", label: "Health" },
-  { value: "finance", label: "Finance" },
-  { value: "education", label: "Education" },
+  { value: "Technology", label: "Technology" },
+  { value: "Programming", label: "Programming" },
+  { value: "AI & ML", label: "AI & ML" },
+  { value: "Web Development", label: "Web Development" },
+  { value: "Cybersecurity", label: "Cybersecurity" },
+  { value: "Blockchain", label: "Blockchain" },
+  { value: "Cloud Computing", label: "Cloud Computing" },
+  { value: "Data Science", label: "Data Science" },
+  { value: "DevOps", label: "DevOps" },
+  { value: "UI/UX Design", label: "UI/UX Design" },
+  { value: "Open Source", label: "Open Source" },
+  { value: "Startups", label: "Startups" },
+  { value: "Marketing", label: "Marketing" },
+  { value: "Finance", label: "Finance" },
+  { value: "Health & Wellness", label: "Health & Wellness" },
+  { value: "Education", label: "Education" },
 ];
+
 
 function CreateBlog() {
   const [markdown, setMarkdown] = useState("# New Blog...\nStart typing here...");

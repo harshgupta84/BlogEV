@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-
+import useUserStore from '@/store/userStore';
 import DotPattern from '@/components/ui/dot-pattern';
 import { cn } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
@@ -19,14 +19,14 @@ function Register() {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
+   const { setUserEmail} = useUserStore();  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
-  
+    setUserEmail(email);
     setLoading(true);
     setError(null);
   

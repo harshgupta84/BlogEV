@@ -4,11 +4,13 @@ import { persist, createJSONStorage } from "zustand/middleware";
 const useUserStore = create(
   persist(
     (set) => ({
+      userEmail: "",
       user: null,
       token: "",
       isSignedIn: false,
       loading: false,
 
+      setUserEmail: (userEmail) => set({ userEmail }),
       setLoading: (loading) => set({ loading }),
       setToken: (token) => set({ token }),
       setIsSignedIn: (isSignedIn) => set({ isSignedIn }),

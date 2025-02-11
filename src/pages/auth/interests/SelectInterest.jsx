@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
-
+import authService from "@/services/authService";
+import useUserStore from "@/store/userStore";
 const topicsList = [
   "Technology",
   "Programming",
@@ -23,8 +24,12 @@ const topicsList = [
 ];
 
 export default function SelectInterest() {
+  
   const [selectedTopics, setSelectedTopics] = useState([]);
   const [search, setSearch] = useState("");
+  const {userEmail}=useUserStore()
+
+
   const navigate=useNavigate();
   const handleToggleTopic = (topic) => {
     setSelectedTopics((prev) =>
@@ -36,6 +41,7 @@ export default function SelectInterest() {
 
   const handleSubmit = () => {
     console.log("Selected Topics:", selectedTopics);
+    authService.setTopic(userEmail,selectedTopics)
     navigate('/auth/login');
     // Here, you can send selectedTopics to the backend or store in global state.
   };

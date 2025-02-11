@@ -1,3 +1,4 @@
+import axios from "axios";
 
 const API_URL = 'http://localhost:3000'; 
 
@@ -30,9 +31,26 @@ const login = async (email, password) => {
       throw new Error(error.message || 'Registration failed');
     }
   };
+
+  
+const setTopic = async (email, topics) => {
+  try {
+    const response = await axios.post("http://localhost:3000/auth/set_topic", {
+      email,
+      topics,
+    });
+
+    return response.data; 
+  } catch (error) {
+    console.error("Error setting topics:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
   
 
 export default {
     login,
     register,
+    setTopic,
 };
