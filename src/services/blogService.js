@@ -44,7 +44,7 @@ export const getBlogById = async (id) => {
       },
     });
 
-    console.log(response.data);
+    
     return response.data; // Return the fetched blog
   } catch (error) {
     console.error("Error fetching blog by ID:", error.response?.data || error.message);
@@ -71,7 +71,7 @@ export const listBlogs = async() => {
       },
     });
 
-    console.log("Blogs Response:", response.data);
+    
     return response.data;
     
   } catch (error) {
@@ -96,7 +96,7 @@ export const listFeedBlogs = async() => {
       },
     });
 
-    console.log("Blogs Response:", response.data);
+   ;
     return response.data;
     
   } catch (error) {
@@ -120,7 +120,7 @@ export const updateBlog = async (id, updatedData) => {
       },
     });
 
-    console.log("Update Response:", response.data);
+   
     return response.data;
   } catch (error) {
     console.error("Error updating blog:", error.response?.data || error.message);

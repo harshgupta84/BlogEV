@@ -40,7 +40,7 @@ export default function SelectInterest() {
   };
 
   const handleSubmit = () => {
-    console.log("Selected Topics:", selectedTopics);
+    
     authService.setTopic(userEmail,selectedTopics)
     navigate('/auth/login');
     // Here, you can send selectedTopics to the backend or store in global state.
