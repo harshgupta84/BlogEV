@@ -1,10 +1,30 @@
-import React from "react";
+import React ,{useState,useEffect}from "react";
 import BlogPosts from "../BlogPosts";
 import { Toaster } from "@/components/ui/toaster";  
 import { ToastProvider } from '@radix-ui/react-toast';
 import useBlogStore from "@/store/blogStore";
 function MyFeed() {
-    const { myfeed} = useBlogStore();
+    const {listBlogs, myfeed} = useBlogStore();
+     const [isLoading, setIsLoading] = useState(true);
+      const [error, setError] = useState(null);
+    
+      useEffect(() => {
+        const fetchBlogs = async () => {
+          try {
+            setIsLoading(true);
+            await listBlogs();
+          } catch (err) {
+            setError(err.message);
+          } finally {
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000);
+          }
+        };
+    
+        fetchBlogs();
+      }, [listBlogs]);
+    
   return (
     <div className="mt-24 ">
       <div className="">
@@ -21,7 +41,6 @@ function MyFeed() {
       </div>
       <div className="mt-5 ">
         <ToastProvider>
-        
           <BlogPosts blogs={myfeed}/>
           <Toaster />
         </ToastProvider>

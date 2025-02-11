@@ -80,6 +80,30 @@ export const listBlogs = async() => {
   }
 };
 
+export const listFeedBlogs = async() => {
+  const {token} = useUserStore.getState();
+ 
+  if (!token) {
+    console.error("No token found. User not authenticated.");
+    return null;
+  }
+
+  try {
+    const response = await axios.get("http://localhost:3000/feed", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+    });
+
+    console.log("Blogs Response:", response.data);
+    return response.data;
+    
+  } catch (error) {
+    console.error("Error fetching user blogs:", error.response?.data || error.message);
+    return null;
+  }
+};
 
 export const updateBlog = async (id, updatedData) => {
   const { token } = useUserStore.getState();

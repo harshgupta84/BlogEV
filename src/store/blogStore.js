@@ -6,6 +6,7 @@ import {
   updateBlog,
   getBlogById,
   listBlogs,
+  listFeedBlogs,
 } from "@/services/blogService";
 
 const useBlogStore = create(
@@ -78,7 +79,7 @@ const useBlogStore = create(
       // List all blogs for feed
       listBlogs: async () => {
         try {
-          const blogs = await listBlogs();
+          const blogs = await listFeedBlogs();
           if (blogs) {
             set({ myfeed: blogs });
           }
@@ -86,6 +87,8 @@ const useBlogStore = create(
           console.error("Error fetching blogs:", error);
         }
       },
+
+      
     }),
     {
       name: "blogs-storage",
