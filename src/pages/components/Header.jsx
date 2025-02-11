@@ -7,7 +7,7 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { Menu, X, PencilLine } from "lucide-react";
+import { Menu, X, PencilLine, LogOut } from "lucide-react";
 import {
   Avatar,
   AvatarFallback,
@@ -17,15 +17,28 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import useUserStore from "@/store/userStore";
+import { useToast } from "@/hooks/use-toast";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const { toast } = useToast();
   
-  const { isSignedIn, pic, name } = useUserStore();
+  const { isSignedIn, pic, name, logout } = useUserStore();
+
+  const handleLogout = () => {
+    logout();
+    toast({
+      title: "Logged out successfully",
+      description: "See you again!",
+      duration: 3000,
+    });
+    navigate("/");
+  };
 
   const navigationItems = isSignedIn
     ? [
@@ -89,6 +102,14 @@ function Header() {
                       <DropdownMenuItem onClick={() => navigate("/profile")}>
                         Profile
                       </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem 
+                        onClick={handleLogout}
+                        className="text-red-500 dark:text-red-400"
+                      >
+                        <LogOut className="mr-2 h-4 w-4" />
+                        Logout
+                      </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </>
@@ -142,25 +163,33 @@ function Header() {
                       Write
                       <PencilLine className="ml-2 h-4 w-4" />
                     </Button>
-                    {/* User Avatar Dropdown in Mobile */}
-                    <DropdownMenu>
-                      <DropdownMenuTrigger className="w-full text-left">
-                        <div className="flex items-center space-x-2 p-2 rounded-md hover:bg-accent">
-                          <Avatar className="border border-gray-300 dark:border-white">
-                            {pic && <AvatarImage src={pic} alt={name} />}
-                            <AvatarFallback className="text-gray-700 dark:text-gray-300">
-                              {name?.charAt(0)?.toUpperCase()}
-                            </AvatarFallback>
-                          </Avatar>
-                          <span>{name}</span>
-                        </div>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem onClick={() => navigate("/profile")}>
-                          Profile
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start text-red-500 dark:text-red-400"
+                      onClick={() => {
+                        handleLogout();
+                        setIsOpen(false);
+                      }}
+                    >
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Logout
+                    </Button>
+                    {/* Profile Link */}
+                    <div 
+                      className="flex items-center space-x-2 p-2 rounded-md hover:bg-accent cursor-pointer"
+                      onClick={() => {
+                        navigate("/profile");
+                        setIsOpen(false);
+                      }}
+                    >
+                      <Avatar className="border border-gray-300 dark:border-white">
+                        {pic && <AvatarImage src={pic} alt={name} />}
+                        <AvatarFallback className="text-gray-700 dark:text-gray-300">
+                          {name?.charAt(0)?.toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                      <span>{name}</span>
+                    </div>
                   </>
                 ) : (
                   <>
