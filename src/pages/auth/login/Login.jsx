@@ -13,7 +13,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   
-  const {loading,setLoading,setIsSignedIn,setToken}=useUserStore();
+  const {loading,setLoading,setIsSignedIn,setToken,setUser}=useUserStore();
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +23,7 @@ function Login() {
     try {
       const data = await authService.login(email, password);
       setToken(data.access_token); // Store token
+      setUser(data.user); // Store user data
       setIsSignedIn(true);  // Store user data and token
       navigate('/blog/myfeed');
     } catch (error) {

@@ -12,12 +12,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { BorderBeam } from "@/components/ui/border-beam";
 import useBlogStore from "@/store/blogStore";
 import { deleteBlog } from "@/services/blogService";
+import useUserStore from "@/store/userStore";
 
 export default function BlogPostCard({ blog }) {
   const { id, title, createdAt, content, topics, author } = blog || {};
   const { toast } = useToast();
   const navigate = useNavigate();
-
+  const {user}=useUserStore();
+  
   // Format the createdAt date safely
   const date = createdAt
     ? new Date(createdAt).toLocaleDateString("en-US", {
@@ -103,10 +105,18 @@ export default function BlogPostCard({ blog }) {
             <span className="text-sm font-medium">{author?.name || "Unknown User"}</span>
           </div>
           <div className="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex gap-7 sm:mt-2 md:mt-0">
-            <Link to={`/blog/update/${id}`}>
-              <PencilLine className="cursor-pointer" />
-            </Link>
-            <Trash className="cursor-pointer" onClick={deleteHandler} />
+          {author?.id == user?.id && (
+
+            <>
+              <Link to={`/blog/update/${id}`}>
+                <PencilLine className="cursor-pointer" />
+              </Link>
+              <Trash className="cursor-pointer" onClick={deleteHandler} />
+            </>
+          )}
+
+          
+            
             <Copy className="cursor-pointer" onClick={copyLinkHandler} />
           </div>
         </div>

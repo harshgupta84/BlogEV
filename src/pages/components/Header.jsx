@@ -28,7 +28,7 @@ function Header() {
   const navigate = useNavigate();
   const { toast } = useToast();
   
-  const { isSignedIn, pic, name, logout } = useUserStore();
+  const { isSignedIn, user, logout,pic } = useUserStore();
 
   const handleLogout = () => {
     logout();
@@ -92,9 +92,9 @@ function Header() {
                   <DropdownMenu>
                     <DropdownMenuTrigger>
                       <Avatar className="border border-gray-300 dark:border-white">
-                        {pic && <AvatarImage src={pic} alt={name} />}
+                        {pic && <AvatarImage src={pic} alt={user.name} />}
                         <AvatarFallback className="text-gray-700 dark:text-gray-300">
-                          {name?.charAt(0)?.toUpperCase()}
+                          {user.name?.charAt(0)?.toUpperCase()}
                         </AvatarFallback>
                       </Avatar>
                     </DropdownMenuTrigger>
@@ -185,10 +185,10 @@ function Header() {
                       <Avatar className="border border-gray-300 dark:border-white">
                         {pic && <AvatarImage src={pic} alt={name} />}
                         <AvatarFallback className="text-gray-700 dark:text-gray-300">
-                          {name?.charAt(0)?.toUpperCase()}
+                          {user.name?.charAt(0)?.toUpperCase()}
                         </AvatarFallback>
                       </Avatar>
-                      <span>{name}</span>
+                      <span>{user.name}</span>
                     </div>
                   </>
                 ) : (
