@@ -14,7 +14,7 @@ import { BorderBeam } from "@/components/ui/border-beam";
 import { deleteBlog } from "@/services/blogService";
 
 export default function BlogPostCard({ blog }) {
-  const { id, title, createdAt, content, topics } = blog;
+  const { id, title, createdAt, content, topics,author } = blog;
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -90,9 +90,10 @@ export default function BlogPostCard({ blog }) {
           <div className="flex items-center space-x-2 text-[#8CCC4C]">
             <Avatar className="h-8 w-8 border dark:border-white">
               <AvatarImage src="/default-avatar.png" alt="Author" />
-              <AvatarFallback>AB</AvatarFallback>
+              <AvatarFallback>{author.name.slice(0, 2).toUpperCase()}</AvatarFallback>
+
             </Avatar>
-            <span className="text-sm font-medium">Unknown Author</span>
+            <span className="text-sm font-medium">{author.name}</span>
           </div>
           <div className="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 flex gap-7 sm:mt-2 md:mt-0">
             <Link to={`/blog/update/${id}`}>
