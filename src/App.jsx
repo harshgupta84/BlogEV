@@ -13,6 +13,7 @@ import Login from "./pages/auth/login/Login";
 import ProtectedRoute from '@/components/routes/ProtectedRoute';
 import useUserStore from '@/store/userStore';
 import { useEffect } from "react";
+import SelectInterest from "./pages/auth/interests/SelectInterest";
 
 function App() {
 
@@ -59,6 +60,7 @@ function App() {
           <Route path="/blog/bookmarks" Component={Bookmarked} />
           <Route path="/auth/register" Component={Register} />
           <Route path="auth/login" Component={Login} />
+          <Route path="/auth/interests" Component={SelectInterest}/>
         </Routes>
       </BrowserRouter>
     </div>

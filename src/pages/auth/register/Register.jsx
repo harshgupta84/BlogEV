@@ -32,7 +32,7 @@ function Register() {
   
     try {
       const data = await authService.register(name, email, password);
-      navigate('/auth/login');
+      navigate('/auth/interests');
     } catch (error) {
       setError('Registration failed. Please try again.');
     } finally {

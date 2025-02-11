@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
   const { token, isSignedIn,loading } = useUserStore();
   if (loading) return <div>Loading...</div>;
 
-  if (isSignedIn==false && token!=="") {
+  if (isSignedIn==false && token==="") {
     return <Navigate to="/auth/login"/>;
   }
 
