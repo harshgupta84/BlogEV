@@ -10,7 +10,8 @@ import { Label } from "@/components/ui/label";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from "@/components/ui/command";
 import { ChevronsUpDown, Check } from "lucide-react";
-
+import DotPattern from "@/components/ui/dot-pattern";
+import { cn } from "@/lib/utils";
 const topicsList = [
   { value: "tech", label: "Technology" },
   { value: "health", label: "Health" },
@@ -30,7 +31,7 @@ function CreateBlog() {
   const handleSave = () => {
     const blogTitle = title || markdown.split("\n")[0].replace(/^#\s*/, "") || "Untitled Blog";
     addBlog(blogTitle, markdown, topics);
-    console.log("Blog saved:", { title: blogTitle, markdown, topics });
+    
     toast({
       title: `Blog "${blogTitle}" saved successfully!`,
       description: "Your blog has been saved to the system.",
@@ -50,6 +51,7 @@ function CreateBlog() {
 
   return (
     <div className="mt-24 container mx-auto max-w-[1200px]">
+       <DotPattern className={cn("inset-4 -z-10 [mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]")} />
       <div className="text-center mb-8">
         <h1 className="text-5xl font-extrabold tracking-tight bg-gradient-to-br from-[#0098C5] to-[#8CCC4C] bg-clip-text text-transparent">
           Markdown Editor

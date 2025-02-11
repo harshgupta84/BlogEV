@@ -70,9 +70,9 @@ const useBlogStore = create(
       },
 
       // Get a blog by ID
-      getBlogById: async(id) => {
-        const data= await getBlogById(id);
-        console.log(data);
+      getBlogById: (id) => {
+        const data=getBlogById(id);
+        return data;
       },
 
       // List all blogs for feed

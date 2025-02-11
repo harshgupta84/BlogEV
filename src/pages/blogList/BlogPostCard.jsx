@@ -8,14 +8,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { CalendarIcon, PencilLine, Trash, Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useBlogStore from "@/store/blogStore";
 import { BorderBeam } from "@/components/ui/border-beam";
+import { deleteBlog } from "@/services/blogService";
 
 export default function BlogPostCard({ blog }) {
   const { id, title, createdAt, content, topics } = blog;
   const { toast } = useToast();
-  const { deleteBlog } = useBlogStore();
+  const navigate = useNavigate();
 
   // Format the createdAt date
   const date = new Date(createdAt).toLocaleDateString("en-US", {
@@ -23,6 +24,28 @@ export default function BlogPostCard({ blog }) {
     month: "long",
     day: "numeric",
   });
+
+  // Safe parsing of topics
+  const parseTopics = (topicsData) => {
+    try {
+      if (Array.isArray(topicsData)) {
+        return topicsData;
+      }
+      if (typeof topicsData === 'string') {
+        // If it's a comma-separated string
+        if (topicsData.includes(',')) {
+          return topicsData.split(',').map(topic => topic.trim());
+        }
+        // Try parsing JSON
+        return JSON.parse(topicsData);
+      }
+      return [];
+    } catch (error) {
+      return [];
+    }
+  };
+
+  const blogTopics = parseTopics(topics);
 
   // Delete handler with toast notification
   const deleteHandler = () => {
@@ -36,7 +59,7 @@ export default function BlogPostCard({ blog }) {
 
   // Copy link handler
   const copyLinkHandler = () => {
-    const baseURL = window.location.origin; 
+    const baseURL = window.location.origin;
     const link = `${baseURL}/blog/view/${id}`;
 
     navigator.clipboard
@@ -99,7 +122,7 @@ export default function BlogPostCard({ blog }) {
             <time dateTime={createdAt}>{date}</time>
           </div>
           <div className="flex gap-2">
-            {JSON.parse(topics || "[]").map((topic, index) => (
+            {blogTopics.map((topic, index) => (
               <Badge key={index} className="dark:bg-[#0098C5] text-sm">
                 {topic}
               </Badge>

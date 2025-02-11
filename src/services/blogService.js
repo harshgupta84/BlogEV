@@ -1,14 +1,8 @@
-import { v4 as uuidv4 } from "uuid";
-import blogsData from "../data/blogs.json"; // Import the JSON file
-
 import useUserStore from "@/store/userStore";
 import axios from "axios";
 
-const API_URL = 'http://localhost:3000/blog'; 
-
 export const addBlog = async (title, content, category) => {
   const { token } = useUserStore.getState();
-  console.log(title, content, category, token);
 
   if (!token) {
     console.error("No token found. User not authenticated.");
@@ -62,7 +56,7 @@ export const getBlogById = async (id) => {
 
 
 export const listBlogs = async() => {
-  const {token} = useUserStore.getState()
+  const {token} = useUserStore.getState();
  
   if (!token) {
     console.error("No token found. User not authenticated.");
@@ -70,44 +64,62 @@ export const listBlogs = async() => {
   }
 
   try {
-    const response = await fetch("http://localhost:3000/blog/myblogs", {
-      method: "GET",
+    const response = await axios.get("http://localhost:3000/blog/myblogs", {
       headers: {
-        "Authorization": `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
       },
     });
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch user blogs");
-    }
-
-   
-    const data = await response.json();
-
-    return data// Assuming the response contains an array of blogs
+    console.log("Blogs Response:", response.data);
+    return response.data;
+    
   } catch (error) {
-    console.error("Error fetching user blogs:", error);
+    console.error("Error fetching user blogs:", error.response?.data || error.message);
     return null;
   }
-  
 };
 
 
-export const updateBlog = (id, updatedData) => {
-  const blogIndex = blogs.findIndex((blog) => String(blog.id) === String(id));
-  if (blogIndex !== -1) {
-    blogs[blogIndex] = { ...blogs[blogIndex], ...updatedData };
-    return blogs[blogIndex];
+export const updateBlog = async (id, updatedData) => {
+  const { token } = useUserStore.getState();
+
+  try {
+    const response = await axios.post(`http://localhost:3000/blog/update/${id}`, {
+      title: updatedData.title,
+      content: updatedData.content,
+      topics: updatedData.topics
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log("Update Response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating blog:", error.response?.data || error.message);
+    throw error; // Throw error to handle it in the component
   }
-  return null;
 };
 
 
-export const deleteBlog = (id) => {
-  const blogIndex = blogs.findIndex((blog) => String(blog.id) === String(id));
-  if (blogIndex !== -1) {
-    const deletedBlog = blogs.splice(blogIndex, 1);
-    return deletedBlog[0];
+export const deleteBlog = async (id) => {
+  const { token } = useUserStore.getState();
+
+  try {
+    const response = await axios.delete(`http://localhost:3000/blog/delete/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    
+    console.log("Delete Response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting blog:", error.response?.data || error.message);
+    throw error;
   }
-  return null;
 };
