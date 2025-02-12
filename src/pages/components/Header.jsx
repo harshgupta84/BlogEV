@@ -42,7 +42,8 @@ function Header() {
 
   const navigationItems = isSignedIn
     ? [
-        { title: "My Blogs", href: "/blog/myblogs" },
+        { title: "My Feed", href: "/blog/myfeed" },
+        { title: "My Blogs", href: "/blog/myblogs" }, 
         { title: "Bookmarks", href: "/blog/bookmarks" },
       ]
     : [];
