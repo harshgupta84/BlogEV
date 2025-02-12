@@ -224,7 +224,8 @@ function UpdateBlog() {
           <div>
             
             <div className="mt-1">
-              <MarkdownEditor 
+              <MarkdownEditor
+              title={title} 
                 markdown={markdown} 
                 setMarkdown={setMarkdown} 
                 onSubmit={handleUpdate} 

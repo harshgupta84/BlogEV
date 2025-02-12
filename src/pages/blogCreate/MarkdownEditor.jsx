@@ -6,7 +6,7 @@ import { PulsatingButton } from "@/components/ui/pulsating-button";
 import LoadingSpinner from "@/utils/LoadingSpinner";
 import { chatSession } from "@/pages/blogCreate/AiModal";
 
-function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
+function MarkdownEditor({title, markdown, setMarkdown, onSubmit, buttonText }) {
   const [isPreviewVisible, setIsPreviewVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Initial check for mobile
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,6 @@ function MarkdownEditor({ markdown, setMarkdown, onSubmit, buttonText }) {
   }, []);
 
   const generateContent = async () => {
-    const title = markdown.split("\n")[0].replace(/^#\s*/, "") || "Untitled Blog";
     const prompt = `Generate content for the blog in Markdown with the title: "${title}" and add the title at the top. Do not include anything else except the main content of the blog.`;
 
     try {

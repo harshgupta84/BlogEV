@@ -5,7 +5,7 @@ import {
   } from "@google/generative-ai";
   
 
-  const genAI = new GoogleGenerativeAI("AIzaSyAe_d18Zlg2g53VW6B5TOhiK-Er0X5CAI8");
+  const genAI = new GoogleGenerativeAI("AIzaSyAJOoEgwnBjYBbZkvttjCwafaRLHJogs8s");
   
   const model = genAI.getGenerativeModel({
     model: "gemini-2.0-flash-exp",

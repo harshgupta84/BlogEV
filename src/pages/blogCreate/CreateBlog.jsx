@@ -114,7 +114,7 @@ function CreateBlog() {
         </div>
       </div>
 
-      <MarkdownEditor markdown={markdown} setMarkdown={setMarkdown} onSubmit={handleSave} buttonText="Save Blog" />
+      <MarkdownEditor title={title} markdown={markdown} setMarkdown={setMarkdown} onSubmit={handleSave} buttonText="Save Blog" />
     </div>
   );
 }
