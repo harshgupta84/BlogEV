@@ -100,7 +100,8 @@
 import React, { useEffect } from "react";
 import useBookmarkStore from "@/store/bookmarkStore";
 import { Link } from "react-router-dom";
-
+import DotPattern from "@/components/ui/dot-pattern";
+import { cn } from "@/lib/utils";
 function Bookmarked() {
   const { bookmarks, fetchBookmarks } = useBookmarkStore();
 
@@ -109,8 +110,20 @@ function Bookmarked() {
   }, [fetchBookmarks]);
 
   return (
-    <div className="container mx-auto px-4 py-8 mt-24">
-      <h1 className="text-3xl font-bold text-center mb-6">Bookmarked Blogs</h1>
+   <div className="mt-24 mx-10">
+         <DotPattern
+           className={cn(
+             "inset-4 -z-10 [mask-image:radial-gradient(40vw_circle_at_center,white,transparent)]"
+           )}
+         />
+         <div>
+           <h1 className="text-5xl md:text-7xl max-w-3xl text-center font-regular mx-auto">
+             <span className="bg-gradient-to-br tracking-tighter from-[#0098C5] to-[#8CCC4C] bg-clip-text text-transparent">
+               Bookmarked Blogs
+             </span>
+             <span className="ml-3">📌</span>
+           </h1>
+         </div>
       {bookmarks.length === 0 ? (
         <p className="text-center text-gray-500">You have no bookmarks yet.</p>
       ) : (
