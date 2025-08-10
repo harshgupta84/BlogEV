@@ -6,6 +6,7 @@ import useUserStore from './userStore';
 const useLoginStore = create((set, get) => ({
   email: '',
   password: '',
+  otp: '',
   token: Cookies.get('token') || null,
   error: null,
   loading: false,
@@ -13,10 +14,11 @@ const useLoginStore = create((set, get) => ({
   setLoading: (loading) => set({ loading }),
   setEmail: (email) => set({ email }),
   setPassword: (password) => set({ password }),
+  setOtp: (otp) => set({ otp }),
 
   reset: () => {
     Cookies.remove('token');
-    set({ email: '', password: '', token: null, error: null });
+    set({ email: '', password: '', otp: '', token: null, error: null });
     const { reset } = useUserStore.getState();
     reset();
   },
@@ -48,7 +50,7 @@ const useLoginStore = create((set, get) => ({
 
   logoutUser: () => {
     Cookies.remove('token');
-    set({ email: '', password: '', token: null, error: null });
+    set({ email: '', password: '', otp: '', token: null, error: null });
     const { reset } = useUserStore.getState();
     reset();
   },
@@ -80,45 +82,35 @@ const useLoginStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       const response = await axios.post('http://localhost:3000/auth/forgot-password', {email});
-      if (response.status === 201) {
-        
-      } else {
-        set({ error: 'Failed to send reset email. Please try again.' });
-      }
-    } catch (error) {
-      set({ error: error.response?.data?.message || 'An error occurred. Please try again.' });
-    } finally {
       set({ loading: false });
+      return response.data;
+    } catch (error) {
+      set({ error: error.response?.data?.message || 'An error occurred. Please try again.', loading: false });
+      return false;
     }
   },
 
-  verifyOtpForgot: async (email,otp) => {
-    console.log(email,otp)
+  verifyOtpForgot: async (email, otp) => {
+    set({ loading: true, error: null });
     try {
-      const response = await axios.post('http://localhost:3000/auth/verify-email', {
-        email,
-        otp,
-      });
-      set({ userInfo: response.data, error: '' });
+      set({ otp, loading: false });
+      return true;
     } catch (error) {
-      console.error('Verification failed:', error);
-      set({ error: 'Verification failed. Please try again.' });
-    }finally{
-      
-      set({otp:''})
+      console.error('OTP storage failed:', error);
+      set({ error: 'Failed to store OTP. Please try again.', loading: false });
+      return false;
     }
   },
 
   resetPassword: async () => {
     set({ loading: true, error: null });
-    const { email, password } = get();
-    console.log(email)
+    const { email, password, otp } = get();
     try {
       const response = await axios.post('http://localhost:3000/auth/reset-password', {
         email,
-        newPassword:password,
+        otp,
+        newPassword: password,
       });
-      // Handle success response if needed
       set({ loading: false });
       return true;
     } catch (err) {
